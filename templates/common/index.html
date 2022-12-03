@@ -1,0 +1,104 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block page_content %}
+    <main>
+
+        <section id="home-page">
+            <article class="home-page-content">
+                <h1>Find The Job That Fits Your Life</h1>
+                <p>On this site, you can find hundreds of job offers, do not hesitate, and apply now.</p>
+                <a href="#" class="view-all-ads">View recipes</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="#" class="view-all-ads">View cocktails</a>
+            </article>
+            <article class="home-page-image">
+                <!-- Do not forget to change the path to the image -->
+                <img src="{% static "/img/man.png" %}" alt="man">
+            </article>
+        </section>
+
+        <section class="intro">
+            <article class="intro-left-side">
+                <article class="intro-left-side-image">
+                    <!-- Do not forget to change the path to the image -->
+                    <img src="{% static "img/people-group.png" %}" alt="people">
+                </article>
+                <article class="intro-left-side-text">
+                    <h1>Here you will find the best recipes and cocktails!</h1>
+                    <h2>These are our cocktails and recipes.</h2>
+                </article>
+            </article>
+
+            <article class="intro-symbol">
+                <!-- Do not forget to change the path to the image -->
+                <img src="{% static "img/strip-square.png" %}" alt="strip-square">
+            </article>
+
+            <article class="intro-right-side">
+                <!--If there are job ads in the database, show them (max 3)-->
+                <article class="intro-right-side-content">
+                    <!-- Do not forget to change the path to the image -->
+                    <img src="{% static "img/cocktail-alc.png" %}" alt="technology">
+                    <h5>
+                        <!--Put the value of the headline below-->
+                        alcoholic cocktail recipes
+                        <!--Put the value of the total number of candidates below-->
+                        <span>recipes: TODO</span>
+                    </h5>
+                </article>
+
+                <article class="intro-right-side-content">
+                    <!-- Do not forget to change the path to the image -->
+                    <img src="{% static "img/cocktail-nonalc.png" %}" alt="technology">
+                    <h5>
+                        <!--Put the value of the headline below-->
+                        non-alcoholic cocktail recipes
+                        <!--Put the value of the total number of candidates below-->
+                        <span>recipes: TODO</span>
+                    </h5>
+                </article>
+
+                <article class="intro-right-side-content">
+                    <!-- Do not forget to change the path to the image -->
+                    <img src="{% static "img/food.png" %}" alt="technology">
+                    <h5>
+                        <!--Put the value of the headline below-->
+                        food recipes
+                        <!--Put the value of the total number of candidates below-->
+                        <span>recipes: TODO</span>
+                    </h5>
+                </article>
+
+                <!--If not show:-->
+                <!--<p class="no-ads-created">No ads created!</p>-->
+
+            </article>
+        </section>
+    </main>
+
+{% endblock %}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{##}
+{##}
+{#{% if user == request.user %}#}
+{#    <strong>{{ user.email }}</strong>#}
+{#{% endif %}#}
+{#{% for user in object_list %}#}
+{#    <li>#}
+{#        {{ user.email }}#}
+{#    </li>#}
+{#{% endfor %}#}
+{##}
+{##}
+{##}
+{#<a href="{% url 'profile details' pk=user.pk %}" class="details-btn">Details</a>#}
+{#<a href="{% url 'profile edit' pk=user.pk %}" class="details-btn">Edit</a>#}
+
+</body>
+</html>

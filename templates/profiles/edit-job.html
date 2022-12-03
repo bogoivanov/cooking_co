@@ -1,0 +1,47 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block page_content %}
+    <main>
+
+        <section id="edit-page">
+
+            <article class="edit-page-container">
+                <form action="{% url 'user edit' pk=user.pk %}" method="post" class="edit-page-form">
+                    <h2>Edit an ad</h2>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    {#                        <label for="headline">Headline:</label>#}
+                    {#                        <input type="text" id="headline" name="" value="">#}
+                    {##}
+                    {#                        <label for="location">Location:</label>#}
+                    {#                        <input type="text" id="location" name="" value="">#}
+                    {#                        #}
+                    {#                        <label for="company-name">Company name:</label>#}
+                    {#                        <input type="text" id="company-name" name="" value="">#}
+                    {##}
+                    {#                        <label for="company-description">Company description:</label>#}
+                    {#                        <input type="text" id="company-description" name="" value="">#}
+
+                    <article class="edit-page-button">
+                        <button class="btn-edit-ads">Edit</button>
+                    </article>
+                </form>
+
+                <article class="edit-page-image">
+                    <!-- Do not forget to change the path to the image -->
+                    <img src="{% static "img/job.png" %}" alt="image">
+                </article>
+            </article>
+
+        </section>
+    </main>
+{% endblock %}
+
+{#<h1>Profile delete</h1>#}
+{#<form method="post" action="{% url 'user delete' pk=user.pk %}">#}
+{#    {% csrf_token %}#}
+{#    {{ form.as_p }}#}
+{##}
+{#    <button>Yes</button>#}
+{#    </button><a class="edit-btn" href="{% url 'profile details' pk=user.pk %}">Go Back</a></button>#}
+{#</form>#}

@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+        <main>
+
+            <section id="login-page">
+
+                <article class="login-page-container">
+
+                    <form action="#" method="" class="login-page-form">
+                        <h2>Login</h2>
+                        <p>Welcome, see the new ads!</p>
+
+                        <label for="email">Email:</label>
+                        <input type="text" id="email" placeholder="petar@abv.bg" name="">
+
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" placeholder="******" name="">
+
+                        <article class="login-page-button">
+                            <button class="btn-login">Login</button>
+                        </article>
+
+                        <article class="no-account">
+                            <p>Don't have an account? <a href="#">Sign up</a></p>
+                        </article>
+                    </form>
+
+                    <article class="login-page-image">
+                        <!-- Do not forget to change the path to the image -->
+                        <img src="./static/img/job.png" alt="job-image">
+                    </article>
+                </article>
+
+            </section>
+        </main>
+
+{% endblock %}

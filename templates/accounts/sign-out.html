@@ -1,0 +1,9 @@
+
+<h1>Sign OUT</h1>
+<form method="post" action="{% url 'sign out' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input name="next" type="hidden" value="{{ next }}">
+    <button>Sign OUT</button>
+
+</form>

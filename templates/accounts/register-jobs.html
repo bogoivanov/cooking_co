@@ -1,0 +1,64 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block page_content %}
+    <main>
+
+        <section id="register-page">
+
+
+            <article class="register-page-container">
+                <form action="{% url 'sign up' %}" method="post" class="register-page-form">
+                    <h2>Register</h2>
+                    <p>Join us and find the perfect job.</p>
+
+                    <label for="email">Email:</label>
+                    {{ form.email|placeholder:'Email' }}
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" placeholder="******" name="">
+
+                    <label for="repeat-password">Repeat Password:</label>
+                    <input type="password" id="repeat-password" placeholder="******" name="">
+
+                    <label for="description">Briefly describe your skills:</label>
+                    <input type="text" id="description" placeholder="Experience with HTML 5, CSS 3, Node.js" name="">
+
+                    <article class="register-page-button">
+                        <button class="btn-register">Register</button>
+                    </article>
+
+                    <article class="account">
+                        <p>Already have an account? <a href="#">Sign in</a></p>
+                    </article>
+
+                </form>
+
+                <article class="register-page-image">
+                    <!-- Do not forget to change the path to the image -->
+                    <img src="./static/img/job.png" alt="image">
+                </article>
+            </article>
+
+        </section>
+    </main>
+
+{% endblock %}
+
+
+
+
+{% load placeholders %}
+<div class="login-register-box">
+    <h1>Watch this</h1>
+    <form method="post" action="{% url 'sign up' %}">
+        Email:{{ form.email|placeholder:'Email' }}
+        Password:{{ form.password1|placeholder:'Password' }}
+        Repeate password:{{ form.password2|placeholder:'Repeate password' }}
+        Birth Date:{{ form.date_of_birth }}
+        <button type="submit">Register</button>
+        {% csrf_token %}
+    </form>
+</div>
+<div class="second-option">
+    <p>Have an account? <a href="{% url 'sign in' %}">Log in</a></p>
+</div>

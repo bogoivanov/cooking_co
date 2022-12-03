@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="icon" href="{% static "img/favicon.png" %}">
+    {#    <link rel="shortcut icon" href="{% static  "img/favicon.png" %}">#}
+    <!-- Do not forget to change the path to the css file -->
+    <link rel="stylesheet" href="{% static "/css/style.css" %}">
+</head>
+
+<body>
+
+<div class="box">
+
+    <!-- In case of error, you should display div with class "error-box" -->
+    <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
+    <!--<div class="error-box">
+        <p>Error</p>
+    </div>-->
+
+    <header class="header">
+        <article class="header-logo">
+            <!-- Do not forget to change the path to the image -->
+            <img src="{% static "img/logo.png" %}" alt="logo_image">
+        </article>
+        <nav class="header-nav">
+            <ul class="header-nav-list">
+
+                <li class="header-nav-list-item active">
+                    <a href="{% url 'index' %}" class="header-nav-list-item-link active">Home Page</a>
+                </li>
+                {% if request.user.is_authenticated %}
+                    <li class="header-nav-list-item">
+                        <a href="#" class="header-nav-list-item-link">All cocktails</a>
+                    </li>
+                    <li class="header-nav-list-item">
+                        <a href="#" class="header-nav-list-item-link">Create cocktail</a>
+                    </li>
+                    <li class="header-nav-list-item">
+                        <a href="#" class="header-nav-list-item-link">Search</a>
+                    </li>
+                    <li class="header-nav-list-item">
+                        <a href="{% url 'user details' pk=request.user.pk %}"
+                           class="header-nav-list-item-link">Profile</a>
+                    </li>
+                    <li class="header-nav-list-item">
+                        <a href="{% url 'sign out' %}" class="header-nav-list-item-link">Logout</a>
+                    </li>
+
+                {% else %}
+                    <li class="header-nav-list-item">
+                        <a href="{% url 'sign up' %}" class="header-nav-list-item-link">Register</a>
+                    </li>
+                    <li class="header-nav-list-item">
+                        <a href="{% url 'sign in' %}" class="header-nav-list-item-link">Login</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+
+
+
+
+    {% block page_content %}
+    {% endblock %}
+
+
+
+    <footer>
+        <p>Cooking coach &copy; 2022 | Follow Us: <a href="https://www.facebook.com/groups/873549316979332"><i
+                class="fa fa-facebook-official w3-hover-opacity"></i></a>
+            <a href=https://www.instagram.com/_cooking_coach_/><i class="fa fa-instagram w3-hover-opacity"></i></a>
+            <a href=https://twitter.com/_cooking_coach_/><i class="fa fa-twitter w3-hover-opacity"></i></a></p>
+
+    </footer>
+</div>
+
+</body>
+
+</html>
