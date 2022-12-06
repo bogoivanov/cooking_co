@@ -1,0 +1,66 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block page_content %}
+    <main>
+
+        <section id="register-page">
+
+
+            <article class="register-page-container">
+                <form action="{% url 'cocktail edit' slug=cocktail.slug  %}"  method="post" class="register-page-form">
+                    <h2>Cocktail</h2>
+                    <p>Edit your cocktail</p>
+{#                    <label for="password">Cocktail name:</label>#}
+{#                    {{ form.cocktail_name }}#}
+{##}
+{#                    <label for="password">Main Ingredient:</label>#}
+{#                    {{ form.main_ingidient }}#}
+{##}
+{#                    <label for="repeat-password">Gender:</label>#}
+{#                    <br>{{ form.gender }}#}
+{##}
+{#                    <br><label for="description">Cocktail image:</label>#}
+{#                    {{ form.cocktail_photo }}#}
+{#                    {% csrf_token %}#}
+
+                    {% csrf_token %}
+                    {{ form }}
+                    {#                    #}
+                    {#                    <p class="error"> {{ field.errors }} </p>#}
+                    {#                    <label for="email">Email:</label>#}
+                    {#                    {{ form.email }}#}
+                    {##}
+                    {#                    <label for="password">Password:</label>#}
+                    {#                    {{ form.password1 }}#}
+                    {##}
+                    {#                    <label for="repeat-password">Repeat Password:</label>#}
+                    {#                    {{ form.password2 }}#}
+                    {##}
+                    {#                    <label for="description">Enter your date of birth:</label>#}
+                    {#                    {{ form.date_of_birth }}#}
+                    {#                    #}
+{#                    {{ form.user == user_id }}#}
+
+
+                    <article class="register-page-button">
+                        <button class="btn-register">Edit cocktail</button>
+                    </article>
+
+
+                </form>
+
+                <article class="register-page-image">
+                    <!-- Do not forget to change the path to the image -->
+                    <img src="{% static "img/register.jpg" %}" alt="image">
+                </article>
+            </article>
+
+        </section>
+    </main>
+
+{% endblock %}
+
+
+
+
+{% load placeholders %}

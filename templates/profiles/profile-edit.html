@@ -6,7 +6,7 @@
         <section id="edit-page">
 
             <article class="edit-page-container">
-                <form action="{% url 'user edit' pk=user.pk %}" method="post" class="edit-page-form">
+                <form action="{% url 'user edit' pk=user.pk %}" method="post" class="edit-page-form" enctype="multipart/form-data">
 
                     <h2>Edit your profile</h2>
                     <p class="error"> {{ field.errors }} </p>

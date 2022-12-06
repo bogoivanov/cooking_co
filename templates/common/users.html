@@ -1,0 +1,77 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block page_content %}
+    <main>
+
+        <section id="details-page">
+            <article class="details-gage-title">
+                <h1>Users Page</h1>
+            </article>
+            {% for user in users %}
+            <article class="details-page-card">
+                {% if not profile.profile_image %}
+                    <article class="details-page-card-image">
+                        <!-- Do not forget to change the path to the image -->
+                        <img src="{% static "img/no-profile-image.png" %}" alt="details-image">
+                    </article>
+                {% else %}
+
+                    <!-- Do not forget to change the path to the image -->
+                    <article class="details-page-card-image">
+                        <img
+                                class="img-circle elevation-2"
+                                src="{{ user.profile_image.url }}"
+                                alt="User Image"/>
+                    </article>
+                {% endif %}
+
+                <article class="details-page-card-content">
+                    <p>Email: {{ user.email }}</p>
+
+                    {% if profile.first_name or profile.last_name %}
+                        <h2>Name: {{ user.first_name }} {{ user.last_name }}</h2>
+                    {% endif %}
+                    <h2>Age: {{ user.age }}</h2>
+                    <h3>Company name: Digital Solutions</h3>
+                    <h4>Company description: We are a group of 4000+ web application exprets</h4>
+                    <h5>Location: Location Sofia, Vitosha Park, Bulgaria</h5>
+
+                    <article class="details-page-card-buttons">
+                        {% if is_owner %}
+                            <a href="{% url 'user edit' pk=user.pk %}" class="btn-edit">Edit</a>
+                            <a href="{% url 'user delete' pk=user.pk %}" class="btn-delete">Delete</a>
+                        {% endif %}
+                        <!--logged in user who did not apply for current ad-->
+                        <!--<a href="#" class="btn-apply">Apply now!</a>
+                        <p class="applied-people">Hurry up, 1 people have already applied.</p>-->
+
+                        <!--logged in user who has already applied for current ad-->
+                        <!--<p class="already-applied">You have already applied!</p>-->
+                    </article>
+                </article>
+
+            </article>
+            {% endfor %}
+
+        </section>
+
+        <!--This section should only be visible to the author of the current ad-->
+        <!--
+        <section id="info-about-candidates">
+            <h2>Candidates for this ad:</h2>
+            <!\--If there are people who have applied, show each of them in the following format--\>
+            <article class="info-about-candidates-card">
+                <h2>Email: petar@abv.bg</h2>
+                <h3>Description of the candidate's skills: Experience with HTML 5, CSS 3, Node.js</h3>
+            </article>
+
+            <article class="info-about-candidates-card">
+                <h2>Email: ivan@abv.bg</h2>
+                <h3>Description of the candidate's skills: Experience with Node.js</h3>
+            </article>
+            <!\--If not, you don't need to visualize anything further-\->
+        </section>-->
+
+    </main>
+
+{% endblock %}

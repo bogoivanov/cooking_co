@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block page_content %}
+    <main>
+
+        <section id="edit-page">
+
+            <article class="edit-page-container">
+                <form action="{% url 'cocktail delete' slug=cocktail.slug  %}" method="post" class="edit-page-form">
+
+                    <h2>You want to delete your cocktail?</h2>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+
+                    <article class="delete-page-button">
+                        <button class="btn-edit-ads">Delete</button>
+                    </article>
+                    <br><article class="delete-page-button">
+                        <a href="{% url 'cocktail details' slug=cocktail.slug  %}" class="btn-edit-ads">Cancel</a>
+                    </article>
+                </form>
+                <article class="edit-page-image">
+                    <!-- Do not forget to change the path to the image -->
+                    <img src="{% static "img/job.png" %}" alt="image">
+                </article>
+            </article>
+
+        </section>
+    </main>
+{% endblock %}
+
+
+
+
+
+{#<h1>Profile delete</h1>#}
+{#<form method="post" action="{% url 'user delete' pk=user.pk %}">#}
+{#    {% csrf_token %}#}
+{#    {{ form.as_p }}#}
+{##}
+{#    <button>Yes</button>#}
+{#    </button><a class="edit-btn" href="{% url 'profile details' pk=user.pk %}">Go Back</a></button>#}
+{#</form>#}

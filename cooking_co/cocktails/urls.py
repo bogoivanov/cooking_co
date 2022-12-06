@@ -1,9 +1,15 @@
-from django.urls import path
+from django.urls import path, include
+
+from cooking_co.cocktails.views import CocktailCreateView, CocktailsViewListView, CocktailEditView, CocktailDetailView, \
+    CocktailDeleteView
 
 urlpatterns = [
-    # path('', IndexViewListView.as_view(), name='index'),
-    # path('users/', UsersViewListView.as_view(), name='users'),
-    # path('profile-details/<int:pk>/', ProfileDetailView.as_view(), name='profile details'),
-    # path('profile-edit/<int:pk>/', ProfileEditView.as_view(), name='profile edit'),
-    # path('profile-delete/<int:pk>/', ProfileDeleteView.as_view(), name='profile delete'),
+    path('all_cocktails/', CocktailsViewListView.as_view(), name='cocktails all'),
+    path('add-cocktail/', CocktailCreateView.as_view(), name='cocktail create'),
+    path('/cocktails/<slug:slug>/', include([
+        path('cocktail-details', CocktailDetailView.as_view(), name='cocktail details'),
+        path('cocktail-edit/', CocktailEditView.as_view(), name='cocktail edit'),
+        path('cocktail-delete/', CocktailDeleteView.as_view(), name='cocktail delete'),
+    ]))
+
 ]

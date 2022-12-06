@@ -9,10 +9,10 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
 from pathlib import Path
 
 from django.urls import reverse_lazy
+import psycopg2
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,13 +77,22 @@ WSGI_APPLICATION = 'cooking_co.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'cooking_co_db',
+        'USER': 'postgres',
+        'PASSWORD': 'bogo123456',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -123,13 +132,23 @@ STATICFILES_DIRS = (
     BASE_DIR / 'staticfiles',
 )
 
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = BASE_DIR / 'mediafiles'
+
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = reverse_lazy('sign in')
-LOGOUT_REDIRECT_URL = reverse_lazy('index')
+
 
 # # Change user model
 AUTH_USER_MODEL = 'accounts.AppUser'
+
+#
+LOGIN_URL = reverse_lazy('sign in')
+LOGIN_REDIRECT_URL = reverse_lazy('index')
+# LOGOUT_REDIRECT_URL = reverse_lazy('index')

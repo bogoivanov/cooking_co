@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
-    <link rel="icon" href="{% static "img/favicon.png" %}">
+    <link rel="icon" href="{% static "img/cocktail-sample.png" %}">
     {#    <link rel="shortcut icon" href="{% static  "img/favicon.png" %}">#}
     <!-- Do not forget to change the path to the css file -->
     <link rel="stylesheet" href="{% static "/css/style.css" %}">
@@ -24,7 +24,7 @@
     <header class="header">
         <article class="header-logo">
             <!-- Do not forget to change the path to the image -->
-            <img src="{% static "img/logo.png" %}" alt="logo_image">
+            <img src="{% static "img/cocktail-sample.png" %}" alt="logo_image">
         </article>
         <nav class="header-nav">
             <ul class="header-nav-list">
@@ -34,13 +34,13 @@
                 </li>
                 {% if request.user.is_authenticated %}
                     <li class="header-nav-list-item">
-                        <a href="#" class="header-nav-list-item-link">All cocktails</a>
+                        <a href="{% url 'cocktails all' %}" class="header-nav-list-item-link">All cocktails</a>
                     </li>
                     <li class="header-nav-list-item">
-                        <a href="#" class="header-nav-list-item-link">Create cocktail</a>
+                        <a href="{% url 'cocktail create' %}" class="header-nav-list-item-link">Create cocktail</a>
                     </li>
                     <li class="header-nav-list-item">
-                        <a href="#" class="header-nav-list-item-link">Search</a>
+                        <a href="{% url 'cocktails search' %}" class="header-nav-list-item-link">Search</a>
                     </li>
                     <li class="header-nav-list-item">
                         <a href="{% url 'user details' pk=request.user.pk %}"

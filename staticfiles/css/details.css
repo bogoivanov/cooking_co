@@ -35,7 +35,7 @@
 .details-page-card-content {
     padding-top: 15px;
     padding-left: 18px;
-    padding-right: 5px;
+    padding-right: 40px;
     word-wrap: break-word;
 }
 
@@ -89,7 +89,7 @@
 
 .details-page-card-image>img {
     width: 285px;
-    height: 320px;
+    height: 340px;
 }
 
 .details-page-card-buttons {
@@ -182,7 +182,7 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    width: 140px;
+    width: 340px;
     padding: 7px;
     background: #3c2064;
     font-weight: 500;

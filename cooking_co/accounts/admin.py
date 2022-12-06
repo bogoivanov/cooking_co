@@ -10,7 +10,7 @@ UserModel = get_user_model()
 class AppUserAdmin(auth_admin.UserAdmin):
     ordering = ('email',)
     model = UserModel
-    list_display = ['email', 'first_name', 'last_name', 'date_of_birth', ]
+    list_display = ['email', 'first_name', 'last_name', 'date_of_birth', 'age']
     add_fieldsets = (
         (None, {'fields': (
             'email', 'password1', 'password2', 'date_of_birth',)}),
@@ -18,7 +18,7 @@ class AppUserAdmin(auth_admin.UserAdmin):
     fieldsets = (
         (None, {
             "fields": (
-                ('email', 'date_of_birth', 'first_name', 'last_name', 'profile_image','gender',)
+                ('email', 'date_of_birth', 'first_name', 'last_name', 'profile_image','gender','age')
             ),
         }),
         ('Permissions', {
@@ -26,3 +26,6 @@ class AppUserAdmin(auth_admin.UserAdmin):
         }),
     )
     search_fields = ('email', )
+    readonly_fields = (
+        'age',
+    )

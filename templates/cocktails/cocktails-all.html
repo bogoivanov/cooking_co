@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block page_content %}
+    <main>
+
+        <section id="all-ads-page">
+            <article class="all-ads-title">
+                <h1>All cocktails</h1>
+            </article>
+            {% if not cocktails %}
+                <!--If there are still no job ads in the database display:-->
+                <article class="not-available-ads">
+                    <h1>No cocktails yet!</h1>
+                    <h2>Be the first who will add cocktail!</h2>
+                </article>
+            {% else %}
+
+                <!--If there are job ads in the database, show each one-->
+                {% for cocktail in cocktails %}
+                    <article class="all-ads-card">
+                        <article class="all-ads-card-image">
+                            <!-- Do not forget to change the path to the image -->
+                            <img src="{{ cocktail.cocktail_photo }}" alt="job-icon" width="150" height="150">
+                        </article>
+
+                        <article class="all-ads-card-content">
+                            <!--You must put the headline value in <h2>-->
+                            <h2>Cocktail name: {{ cocktail.cocktail_name }}</h2>
+                            <h3>Cocktail main ingredient: {{ cocktail.main_ingredient }}</h3>
+                            <h3>{{ cocktail.other_ingredient }}</h3>
+                        </article>
+
+                        <article class="all-ads-card-buttons">
+                            <a href="{% url 'cocktail details' slug=cocktail.slug %}" class="btn-details">Details</a>
+                        </article>
+                    </article>
+                {% endfor %}
+            {% endif %}
+
+            <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+            </div>
+        </section>
+    </main>
+
+{% endblock %}
