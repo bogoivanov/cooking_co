@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth import forms as auth_forms, login, get_user_model
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.datetime_safe import date
@@ -18,6 +19,7 @@ from django.views import generic as views
 from cooking_co.accounts.forms import UserCreateForm
 from cooking_co.accounts.helpers.get_age import get_age_profile
 from cooking_co.cocktails.models import Cocktail
+from cooking_co.common.models import CocktailComment, CocktailLike
 
 UserModel = get_user_model()
 
@@ -62,8 +64,6 @@ class UserDetailsView(views.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['profile_age'] = get_age_profile(self.object.date_of_birth)
-        # TODO
         context['cocktails_count'] = Cocktail.objects.filter(user_id=self.request.user.pk).count()
         context['cocktails'] = Cocktail.objects.filter(user_id=self.request.user.pk)
         context['is_owner'] = self.request.user == self.object
@@ -84,8 +84,12 @@ class UserDeleteView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     context_object_name = 'profile'
     template_name = 'profiles/profile-delete.html'
     success_url = reverse_lazy('index')
-
-
+    def form_valid(self, form):
+        CocktailComment.objects.filter(user_id=self.object.id).delete()
+        CocktailLike.objects.filter(user_id=self.object.id).delete()
+        success_url = self.get_success_url()
+        self.object.delete()
+        return HttpResponseRedirect(success_url)
 
 
 

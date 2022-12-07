@@ -1,4 +1,3 @@
-import pyperclip as pyperclip
 from django import forms
 from django.contrib.auth import mixins as auth_mixins, get_user_model
 from django.contrib.auth.decorators import login_required
@@ -9,49 +8,66 @@ from django.shortcuts import render, redirect
 
 from cooking_co.cocktails.models import Cocktail
 from cooking_co.common.decorators import allow_groups
+from cooking_co.common.forms import CocktailCommentForm
+from cooking_co.common.models import CocktailComment, CocktailLike
 
 UserModel = get_user_model()
 
 
-
-# def like_photo(request, photo_id):
-#     user_liked_photos = PhotoLike.objects \
-#         .filter(photo_id=photo_id, user_id=request.user.pk)
-#
-#     if user_liked_photos:
-#         user_liked_photos.delete()
-#     else:
-#         PhotoLike.objects.create(
-#             photo_id=photo_id,
-#             user_id=request.user.pk,
-#         )
-#
-#     return redirect(get_photo_url(request, photo_id))
-#
-def get_photo_url(request, photo_id):
-    return request.META['HTTP_REFERER'] + f'#photo-{photo_id}'
-def share_photo(request, photo_id):
-    photo_details_url = reverse('details photo', kwargs={
-        'pk': photo_id
-    })
-    pyperclip.copy(photo_details_url)
-    return redirect(get_photo_url(request, photo_id))
-
-#
 # @login_required
-# def comment_photo(request, photo_id):
-#     photo = Photo.objects.filter(pk=photo_id) \
-#         .get()
-#
-#     form = PhotoCommentForm(request.POST)
-#
-#     if form.is_valid():
-#         comment = form.save(commit=False)  # Does not persist to DB
-#         comment.photo = photo
-#         comment.save()
-#
-#     return redirect('index')
 
+# def get_cocktail_url(request, cocktail_id):
+#     print(request.META['HTTP_REFERER'])
+#     return request.META['HTTP_REFERER'] + f'{cocktail_id}' + f'/cocktail-details/'
+# http://127.0.0.1:8000/cocktails/margaritha-1/cocktail-details/
+# http://127.0.0.1:8000/cocktails/margaritha-1/cocktail-details/1/cocktail-details/
+@login_required
+def comment_cocktail(request, cocktail_id):
+    cocktail = Cocktail.objects.filter(id=cocktail_id).get()
+    form = CocktailCommentForm(request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.cocktail = cocktail
+        comment.user = request.user
+        comment.save()
+
+    return redirect(request.META['HTTP_REFERER'])
+
+
+@login_required
+def like_cocktail(request, cocktail_id):
+    user_liked_photos = CocktailLike.objects \
+        .filter(cocktail_id=cocktail_id, user_id=request.user.pk)
+    cocktail = Cocktail.objects \
+        .filter(id=cocktail_id).first()
+
+    user_is_owner = cocktail.user.id == request.user.pk
+
+    if user_is_owner:
+        return redirect(request.META['HTTP_REFERER'])
+    elif user_liked_photos:
+        user_liked_photos.delete()
+    else:
+        CocktailLike.objects.create(
+                cocktail_id=cocktail_id,
+                user_id=request.user.pk,
+            )
+    return redirect(request.META['HTTP_REFERER'])
+
+
+# class CocktailCommentCreateView(auth_mixins.LoginRequiredMixin, views.CreateView):
+#     model = CocktailComment
+#     form_class = CocktailCommentForm
+#     success_url = reverse_lazy('index')
+#     context_object_name = 'commentform'
+#
+#     def form_valid(self, form):
+#         form.instance.user = self.request.user
+#         form.save()
+#         return super().form_valid(form)
+
+
+#
 
 
 class IndexViewListView(auth_mixins.LoginRequiredMixin, views.ListView):
@@ -60,7 +76,7 @@ class IndexViewListView(auth_mixins.LoginRequiredMixin, views.ListView):
     template_name = 'common/index.html'
 
 
-class CocktailsSerchListView(auth_mixins.LoginRequiredMixin, views.ListView):
+class CocktailsSearchListView(auth_mixins.LoginRequiredMixin, views.ListView):
     model = Cocktail
     context_object_name = 'cocktails'
     template_name = 'common/search-cocktails.html'
@@ -82,7 +98,7 @@ class CocktailsSerchListView(auth_mixins.LoginRequiredMixin, views.ListView):
         return pattern.lower() if pattern else None
 
 
-@allow_groups(groups=['Users statistics'])
+# @allow_groups(groups=['Users statistics'])
 def users_list(request):
     users = UserModel.objects.all()
     context = {

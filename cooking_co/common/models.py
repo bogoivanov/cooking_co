@@ -6,7 +6,7 @@ from cooking_co.cocktails.models import Cocktail
 UserModel = get_user_model()
 
 
-class PhotoComment(models.Model):
+class CocktailComment(models.Model):
     MAX_TEXT_LENGTH = 300
     text = models.CharField(
         max_length=MAX_TEXT_LENGTH,
@@ -20,7 +20,7 @@ class PhotoComment(models.Model):
         null=False,
     )
 
-    photo = models.ForeignKey(
+    cocktail = models.ForeignKey(
         Cocktail,
         on_delete=models.RESTRICT,
         null=False,
@@ -32,10 +32,14 @@ class PhotoComment(models.Model):
         on_delete=models.RESTRICT,
     )
 
+    class Meta:
+        ordering = ['-publication_date_and_time', ]
 
-class PhotoLike(models.Model):
+
+class CocktailLike(models.Model):
     # Photo's field for likes is named `{NAME_OF_THIS_MODEL.lower()}_set`
-    photo = models.ForeignKey(
+
+    cocktail = models.ForeignKey(
         Cocktail,
         on_delete=models.RESTRICT,
         null=False,

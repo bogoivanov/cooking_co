@@ -2,6 +2,9 @@ from cooking_co.cocktails.models import Cocktail
 
 from django import forms
 
+from cooking_co.common.models import CocktailComment
+from cooking_co.core.disabled_form_mixin import DisabledFormMixin
+
 
 # from petstagram.core.form_mixins import DisabledFormMixin
 # from petstagram.pets.models import Pet
@@ -49,5 +52,51 @@ class CocktailEditForm(CocktailBaseForm):
     disabled_fields = ('cocktail_name',)
 
 
-class CocktailDeleteForm(CocktailBaseForm):
-    disabled_fields = ('cocktail_name', 'main_ingredient', 'cocktail_photo')
+# class CocktailDeleteForm(CocktailBaseForm):
+#     disabled_fields = '__all__'
+#
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#
+#     def save(self, commit=True):
+#         if commit:
+#             self.instance.tagged_pets.clear()  # many-to-many
+#
+#             Photo.objects.all() \
+#                 .first().tagged_pets.clear()
+#             CocktailLike.objects.filter(photo_id=self.instance.id) \
+#                 .delete()  # one-to-many
+#             CocktailComment.objects.filter(photo_id=self.instance.id) \
+#                 .delete()  # one-to-many
+#             self.instance.delete()
+#
+#         return self.instance
+
+
+# class CocktailDeleteForm(DisabledFormMixin, CocktailBaseForm):
+#     disabled_fields = '__all__'
+#     print('sffssffsfdaafs')
+#
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#
+#     def save(self, commit=True):
+#         print(self.instance.id)
+#         print('sffssffsfdaafs')
+#         if commit:
+#             self.instance.tagged_pets.clear()  # many-to-many
+#             # Cocktail.objects.all() \
+#             #     .first().tagged_pets.clear()
+#             # CocktailLike.objects.filter(photo_id=self.instance.id) \
+#             #     .delete()  # one-to-many
+#             CocktailComment.objects.filter(cocktail_id=self.instance.id) \
+#                 .delete()
+#             print(CocktailComment.objects.filter(cocktail_id=self.instance.id))
+#             # CocktailComment.objects.filter(user_id=self.instance.id) \
+#             #     .delete()
+#             # one-to-many
+#             self.instance.delete()
+#
+#         return self.instance
+# # class CocktailDeleteForm(CocktailBaseForm):
+# #     disabled_fields = ('cocktail_name', 'main_ingredient', 'cocktail_photo')

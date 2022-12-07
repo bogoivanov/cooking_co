@@ -34,6 +34,14 @@
                 </li>
                 {% if request.user.is_authenticated %}
                     <li class="header-nav-list-item">
+                        <a href="#" class="header-nav-list-item-link">All cocktails</a>
+{#                        href="{% url 'recipes all' %}"#}
+                    </li>
+                    <li class="header-nav-list-item">
+                        <a href="#" class="header-nav-list-item-link">Create cocktail</a>
+{#                        href="{% url 'recipes create' %}"#}
+                    </li>
+                    <li class="header-nav-list-item">
                         <a href="{% url 'cocktails all' %}" class="header-nav-list-item-link">All cocktails</a>
                     </li>
                     <li class="header-nav-list-item">

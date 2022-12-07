@@ -52,7 +52,7 @@ class AppUser(auth_models.AbstractUser):
         )
     )
     profile_image = models.ImageField(
-        upload_to= 'profile-pictures/',
+        upload_to='profile-pictures/',
         null=True,
         blank=True,
         validators=(validate_file_less_than_5mb,),

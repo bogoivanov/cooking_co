@@ -6,7 +6,7 @@ from django.utils.text import slugify
 
 from cooking_co.accounts.helpers.get_age import get_age_profile
 
-AppUser = get_user_model()
+UserModel = get_user_model()
 
 
 # Create your models here.
@@ -59,7 +59,7 @@ class Cocktail(StrFromFieldsMixin, models.Model):
     )
 
     user = models.ForeignKey(
-        AppUser,
+        UserModel,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,

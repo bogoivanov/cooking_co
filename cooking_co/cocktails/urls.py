@@ -6,8 +6,8 @@ from cooking_co.cocktails.views import CocktailCreateView, CocktailsViewListView
 urlpatterns = [
     path('all_cocktails/', CocktailsViewListView.as_view(), name='cocktails all'),
     path('add-cocktail/', CocktailCreateView.as_view(), name='cocktail create'),
-    path('/cocktails/<slug:slug>/', include([
-        path('cocktail-details', CocktailDetailView.as_view(), name='cocktail details'),
+    path('/<slug:slug>/', include([
+        path('cocktail-details/', CocktailDetailView.as_view(), name='cocktail details'),
         path('cocktail-edit/', CocktailEditView.as_view(), name='cocktail edit'),
         path('cocktail-delete/', CocktailDeleteView.as_view(), name='cocktail delete'),
     ]))

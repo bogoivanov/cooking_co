@@ -9,9 +9,8 @@
                 <form action="{% url 'cocktail delete' slug=cocktail.slug  %}" method="post" class="edit-page-form">
 
                     <h2>You want to delete your cocktail?</h2>
+                    {{ form }}
                     {% csrf_token %}
-                    {{ form.as_p }}
-
                     <article class="delete-page-button">
                         <button class="btn-edit-ads">Delete</button>
                     </article>

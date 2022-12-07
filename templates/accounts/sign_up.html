@@ -1,6 +1,7 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block page_content %}
+{% load placeholders %}
     <main>
 
         <section id="register-page">
@@ -10,18 +11,21 @@
                 <form action="{% url 'sign up' %}" method="post" class="register-page-form">
                     <h2>Register</h2>
                     <p>Join us and find the perfect job.</p>
-                    <p class="error"> {{ field.errors }} </p>
+{#                    <p class="error"> {{ field.errors }} </p>#}
                     <label for="email">Email:</label>
-                    {{ form.email }}
+                    {{ form.email|placeholder:'email ' }}
+                    {{ form.email.errors }}
+{#                    {{ form.email|placeholder: 'Email' }}#}
 
                     <label for="password">Password:</label>
-                    {{ form.password1 }}
-
+                    {{ form.password1|placeholder:'password' }}
+                    {{ form.password1.errors }}
                     <label for="repeat-password">Repeat Password:</label>
-                    {{ form.password2 }}
-
+                    {{ form.password2|placeholder:'repeat password' }}
+                    {{ form.password2.errors }}
                     <label for="description">Enter your date of birth:</label>
                     {{ form.date_of_birth }}
+                    {{ form.date_of_birth.errors  }}
                     {% csrf_token %}
                     <article class="register-page-button">
                         <button class="btn-register">Register</button>
