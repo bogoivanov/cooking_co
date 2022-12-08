@@ -1,10 +1,12 @@
 from django import forms
 from django.contrib.auth import mixins as auth_mixins, get_user_model
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy, reverse
 from django.views import generic as views
 from django.shortcuts import render, redirect
+from django.views.generic import ListView
 
 from cooking_co.cocktails.models import Cocktail
 from cooking_co.common.decorators import allow_groups
@@ -49,9 +51,10 @@ def like_cocktail(request, cocktail_id):
         user_liked_photos.delete()
     else:
         CocktailLike.objects.create(
-                cocktail_id=cocktail_id,
-                user_id=request.user.pk,
-            )
+            cocktail_id=cocktail_id,
+            user_id=request.user.pk,
+        )
+
     return redirect(request.META['HTTP_REFERER'])
 
 
@@ -67,16 +70,19 @@ def like_cocktail(request, cocktail_id):
 #         return super().form_valid(form)
 
 
-#
 
+class TestViewListView(LoginRequiredMixin, ListView):
+    model = UserModel
+    context_object_name = 'profile'
+    template_name = 'common/test.html'
 
-class IndexViewListView(auth_mixins.LoginRequiredMixin, views.ListView):
+class IndexViewListView(LoginRequiredMixin, ListView):
     model = UserModel
     context_object_name = 'profile'
     template_name = 'common/index.html'
 
 
-class CocktailsSearchListView(auth_mixins.LoginRequiredMixin, views.ListView):
+class CocktailsSearchListView(LoginRequiredMixin, ListView):
     model = Cocktail
     context_object_name = 'cocktails'
     template_name = 'common/search-cocktails.html'
@@ -97,7 +103,7 @@ class CocktailsSearchListView(auth_mixins.LoginRequiredMixin, views.ListView):
         pattern = self.request.GET.get('pattern', None)
         return pattern.lower() if pattern else None
 
-
+# TODO when finish
 # @allow_groups(groups=['Users statistics'])
 def users_list(request):
     users = UserModel.objects.all()
@@ -106,7 +112,7 @@ def users_list(request):
     }
 
     return render(request, 'common/users.html', context, )
-
+# TODO when finish
 # @allow_groups(groups=['Staff'])
 # class UsersViewListView(views.ListView):
 #     model = UserModel

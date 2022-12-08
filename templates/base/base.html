@@ -9,6 +9,8 @@
     {#    <link rel="shortcut icon" href="{% static  "img/favicon.png" %}">#}
     <!-- Do not forget to change the path to the css file -->
     <link rel="stylesheet" href="{% static "/css/style.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 
 <body>
@@ -34,11 +36,11 @@
                 </li>
                 {% if request.user.is_authenticated %}
                     <li class="header-nav-list-item">
-                        <a href="#" class="header-nav-list-item-link">All cocktails</a>
+                        <a href="#" class="header-nav-list-item-link">All recipes</a>
 {#                        href="{% url 'recipes all' %}"#}
                     </li>
                     <li class="header-nav-list-item">
-                        <a href="#" class="header-nav-list-item-link">Create cocktail</a>
+                        <a href="#" class="header-nav-list-item-link">Create recipe</a>
 {#                        href="{% url 'recipes create' %}"#}
                     </li>
                     <li class="header-nav-list-item">

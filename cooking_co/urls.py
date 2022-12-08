@@ -29,4 +29,6 @@ urlpatterns = [
 
     path('cocktails', include('cooking_co.cocktails.urls')),
 
+
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

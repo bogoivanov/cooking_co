@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-from cooking_co.common.views import IndexViewListView, CocktailsSearchListView, users_list, comment_cocktail, like_cocktail
+from cooking_co.common.views import IndexViewListView, CocktailsSearchListView, users_list, comment_cocktail, like_cocktail, TestViewListView
 
 urlpatterns = [
     path('', IndexViewListView.as_view(), name='index'),
@@ -10,4 +10,5 @@ urlpatterns = [
     path('create-comment/<int:cocktail_id>/', comment_cocktail, name='comment cocktail'),
     path('like-cocktail/<int:cocktail_id>/', like_cocktail, name='like cocktail'),
     # path('users/', UsersViewListView.as_view(), name='all users')
+    path('test/',TestViewListView.as_view() , name='all users'),
 ]

@@ -59,7 +59,6 @@ class CocktailDetailView(DetailView):
         context['comments'] = self.object.cocktailcomment_set.all() or None
         context['form'] = CocktailCommentForm
         context['is_owner'] = self.request.user.pk == self.object.user_id
-        print(context)
         return context
         # cocktail_liked = CocktailLike.objects.filter(cocktail__user_id__in=CocktailLike.objects.all())
         # .prefetch_related('photolike_set')
