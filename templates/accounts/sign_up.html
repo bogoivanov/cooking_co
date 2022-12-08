@@ -48,22 +48,3 @@
 
 {% endblock %}
 
-
-
-
-{% load placeholders %}
-<div class="login-register-box">
-    <h1>Watch this</h1>
-    <form method="post" action="{% url 'sign up' %}">
-        Email:{{ form.email|placeholder:'Email' }}
-        Password:{{ form.password1|placeholder:'Password' }}
-        Repeate password:{{ form.password2|placeholder:'Repeate password' }}
-        Birth Date:{{ form.date_of_birth }}
-        <button type="submit">Register</button>
-        {% csrf_token %}
-    </form>
-</div>
-<div class="second-option">
-    <p>Have an account? <a href="{% url 'sign in' %}">Log in</a></p>
-</div>
-

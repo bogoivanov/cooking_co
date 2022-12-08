@@ -25,11 +25,11 @@ class Cocktail(StrFromFieldsMixin, models.Model):
     NON_ALCOHOLIC = 'non-alcoholic'
     VODKA = 'vodka'
     WHISKEY = 'whiskey'
-    LIQUEURS = 'liquers'
+    LIQUORS = 'liquors'
     RUM = 'rum'
     GIN = 'gin'
     TEQUILA = 'tequila'
-    INGREDIENTS = [(x, x) for x in (NON_ALCOHOLIC, VODKA, WHISKEY, LIQUEURS, RUM, GIN, TEQUILA)]
+    INGREDIENTS = [(x, x) for x in (NON_ALCOHOLIC, VODKA, WHISKEY, LIQUORS, RUM, GIN, TEQUILA)]
 
     cocktail_name = models.CharField(
         max_length=MAX_NAME,

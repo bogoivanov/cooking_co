@@ -14,11 +14,25 @@ from cooking_co.core.disabled_form_mixin import DisabledFormMixin
 # - `ModelForm` binds to models
 # - `Form` is detached from models
 
+
+
+
+
 class CocktailBaseForm(forms.ModelForm):
     class Meta:
         model = Cocktail
-        # fields = '__all__' (not the case, we want to skip `slug`
+        # fields = '__all__' (not the case, we want to skip `slug`)
         fields = ('cocktail_name', 'main_ingredient', 'other_ingredient', 'cocktail_photo')
+
+
+        # def clean(self):
+        #     cleaned_data = super().clean()
+        #     print(cleaned_data)
+        #     main_ingredient = cleaned_data.get('main_ingredient')
+        #     self._validate_unique = True
+        #     return self.cleaned_data
+
+
         # exclude = ('slug',)
         # labels = {
         #     'cocktail_name': 'Cocktail name',
@@ -42,11 +56,11 @@ class CocktailBaseForm(forms.ModelForm):
         #         }
         #     )
         # }
-
+class CocktailLittleBaseForm(CocktailBaseForm):
+    pass
 
 class CocktailCreateForm(CocktailBaseForm):
     pass
-
 
 class CocktailEditForm(CocktailBaseForm):
     disabled_fields = ('cocktail_name',)

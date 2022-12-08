@@ -6,6 +6,16 @@ from cooking_co.cocktails.models import Cocktail
 @admin.register(Cocktail)
 class CocktailAdmin(admin.ModelAdmin):
     pass
+
+    # @staticmethod
+    # def pets(current_photo_obj):
+    #     tagged_pets = current_photo_obj.tagged_pets.all()
+    #     if tagged_pets:
+    #         return ', '.join(p.name for p in tagged_pets)
+    #     return 'No pets'
+
+
+
 # @admin.register(UserModel)
 # class AppUserAdmin(auth_admin.UserAdmin):
 #     ordering = ('email',)

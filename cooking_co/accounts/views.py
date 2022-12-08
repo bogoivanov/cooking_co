@@ -48,7 +48,6 @@ class UserEditView(views.UpdateView):
     template_name = 'profiles/profile-edit.html'
     model = UserModel
     fields = ('first_name', 'last_name', 'gender', 'profile_image')
-    success_url = reverse_lazy('index')
     def get_success_url(self):
         return reverse_lazy('user details', kwargs={
             'pk': self.request.user.pk,

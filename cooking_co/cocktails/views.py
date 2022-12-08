@@ -1,5 +1,8 @@
+from django import forms
 from django.contrib.auth import get_user_model, login
+from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.forms import modelform_factory
 from django.http import HttpResponseRedirect, request
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -8,7 +11,7 @@ from django.contrib.auth import mixins as auth_mixins, get_user_model
 from django.views.generic import CreateView, UpdateView, DetailView, DeleteView
 
 from cooking_co.accounts.helpers.get_age import get_age_profile
-from cooking_co.cocktails.forms import CocktailCreateForm
+from cooking_co.cocktails.forms import CocktailCreateForm, CocktailLittleBaseForm
 from cooking_co.cocktails.models import Cocktail
 from cooking_co.common.forms import CocktailCommentForm
 from cooking_co.common.models import CocktailComment, CocktailLike
@@ -24,7 +27,6 @@ class CocktailsViewListView(LoginRequiredMixin, views.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print(self.request.user.email)
         age_of_user = self.request.user.age
         if age_of_user < 21:
             context['cocktails'] = self.object_list.filter(main_ingredient='non-alcoholic')
@@ -37,6 +39,24 @@ class CocktailCreateView(CreateView):
     template_name = 'cocktails/create-cocktail.html'
     form_class = CocktailCreateForm
     success_url = reverse_lazy('cocktails all')
+    # TODO dont work have to add 2 forms
+    # check in class ModelForm
+    # check in \
+    # modelform_factory()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # print(context['form']['main_ingredient'])
+
+        print(context['form'])
+        age_of_user = self.request.user.age
+        if age_of_user < 21:
+            context['form'] = CocktailLittleBaseForm
+            # print(context['form'])
+        else:
+            context['form'] = CocktailCreateForm
+        return context
+
+
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -49,12 +69,11 @@ class CocktailEditView(UpdateView):
     model = Cocktail
     context_object_name = 'cocktail'
     fields = ('cocktail_name', 'main_ingredient', 'other_ingredient', 'cocktail_photo')
-    success_url = reverse_lazy('cocktails all')
 
-    # def get_success_url(self):
-    #     return reverse_lazy('cocktail details', kwargs={
-    #         'cocktail_slug': self.slug,
-    #     })
+    def get_success_url(self):
+        return reverse_lazy('cocktail details', kwargs={
+            'slug': self.object.slug,
+        })
 
 
 class CocktailDetailView(DetailView):
@@ -67,8 +86,8 @@ class CocktailDetailView(DetailView):
         cocktail = self.object
         cocktail_liked = CocktailLike.objects.filter(cocktail_id=cocktail.pk, user_id=self.request.user.pk)
         context['user_liked_cocktail'] = cocktail_liked
-        context['cocktail_likes_count'] = len(self.object.cocktaillike_set.all()) or "0"
-        context['comments'] = self.object.cocktailcomment_set.all() or None
+        context['cocktail_likes_count'] = len(self.object.cocktaillike_set.all())
+        context['comments'] = self.object.cocktailcomment_set.all()
         context['form'] = CocktailCommentForm
         context['is_owner'] = self.request.user.pk == self.object.user_id
         return context
@@ -92,30 +111,3 @@ class CocktailDeleteView(LoginRequiredMixin, DeleteView):
         success_url = self.get_success_url()
         self.object.delete()
         return HttpResponseRedirect(success_url)
-
-    #
-    #
-    #     login(self.request, self.object)
-    #     return result
-    #
-    # def save(self, commit=True):
-    #     print(self.object.id)
-    #     print('sffssffsfdaafs')
-    #     if commit:
-    #         self.object.tagged_pets.clear()  # many-to-many
-    #         # Cocktail.objects.all() \
-    #         #     .first().tagged_pets.clear()
-    #         # CocktailLike.objects.filter(photo_id=self.instance.id) \
-    #         #     .delete()  # one-to-many
-    #         CocktailComment.objects.filter(cocktail_id=self.object.id) \
-    #             .delete()
-    #         print(CocktailComment.objects.filter(cocktail_id=self.object.id))
-    #         # CocktailComment.objects.filter(user_id=self.instance.id) \
-    #         #     .delete()
-    #         # one-to-many
-    #         self.object.delete()
-    #
-    #     return self.object
-    #
-    #     login(self.request, self.object)
-    #     return result
