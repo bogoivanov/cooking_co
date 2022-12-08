@@ -22,6 +22,16 @@ class CocktailsViewListView(LoginRequiredMixin, views.ListView):
     model = Cocktail
     template_name = 'cocktails/cocktails-all.html'  # web/employee_list.html
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(self.request.user.email)
+        age_of_user = self.request.user.age
+        if age_of_user < 21:
+            context['cocktails'] = self.object_list.filter(main_ingredient='non-alcoholic')
+        else:
+            context['cocktails'] = self.object_list.all()
+        return context
+
 
 class CocktailCreateView(CreateView):
     template_name = 'cocktails/create-cocktail.html'
@@ -45,6 +55,8 @@ class CocktailEditView(UpdateView):
     #     return reverse_lazy('cocktail details', kwargs={
     #         'cocktail_slug': self.slug,
     #     })
+
+
 class CocktailDetailView(DetailView):
     template_name = 'cocktails/cocktail-details.html'
     model = Cocktail
@@ -73,13 +85,13 @@ class CocktailDeleteView(LoginRequiredMixin, DeleteView):
     model = Cocktail
     template_name = 'cocktails/cocktail-delete.html'
     success_url = reverse_lazy('index')
+
     def form_valid(self, form):
         CocktailComment.objects.filter(cocktail_id=self.object.id).delete()
         CocktailLike.objects.filter(cocktail_id=self.object.id).delete()
         success_url = self.get_success_url()
         self.object.delete()
         return HttpResponseRedirect(success_url)
-
 
     #
     #

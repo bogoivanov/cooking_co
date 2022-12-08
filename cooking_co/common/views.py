@@ -38,10 +38,8 @@ def comment_cocktail(request, cocktail_id):
 
 @login_required
 def like_cocktail(request, cocktail_id):
-    user_liked_photos = CocktailLike.objects \
-        .filter(cocktail_id=cocktail_id, user_id=request.user.pk)
-    cocktail = Cocktail.objects \
-        .filter(id=cocktail_id).first()
+    user_liked_photos = CocktailLike.objects.filter(cocktail_id=cocktail_id, user_id=request.user.pk)
+    cocktail = Cocktail.objects.filter(id=cocktail_id).first()
 
     user_is_owner = cocktail.user.id == request.user.pk
 
@@ -50,10 +48,7 @@ def like_cocktail(request, cocktail_id):
     elif user_liked_photos:
         user_liked_photos.delete()
     else:
-        CocktailLike.objects.create(
-            cocktail_id=cocktail_id,
-            user_id=request.user.pk,
-        )
+        CocktailLike.objects.create(cocktail_id=cocktail_id, user_id=request.user.pk, )
 
     return redirect(request.META['HTTP_REFERER'])
 
@@ -70,16 +65,26 @@ def like_cocktail(request, cocktail_id):
 #         return super().form_valid(form)
 
 
-
 class TestViewListView(LoginRequiredMixin, ListView):
     model = UserModel
     context_object_name = 'profile'
     template_name = 'common/test.html'
 
+
 class IndexViewListView(LoginRequiredMixin, ListView):
     model = UserModel
     context_object_name = 'profile'
     template_name = 'common/index.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['alcoholic_cocktails'] = Cocktail.objects.exclude(main_ingredient='non-alcoholic').count()
+        context['non_alcoholic_cocktails'] = Cocktail.objects.filter(main_ingredient='non-alcoholic').count()
+        context['all_cocktails'] = Cocktail.objects.all().count()
+        context['age_of_user'] = self.request.user.age
+
+        # TODO when recipes
+        return context
 
 
 class CocktailsSearchListView(LoginRequiredMixin, ListView):
@@ -102,6 +107,7 @@ class CocktailsSearchListView(LoginRequiredMixin, ListView):
     def __get_pattern(self):
         pattern = self.request.GET.get('pattern', None)
         return pattern.lower() if pattern else None
+
 
 # TODO when finish
 # @allow_groups(groups=['Users statistics'])
