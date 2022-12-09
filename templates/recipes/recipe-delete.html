@@ -6,21 +6,21 @@
         <section id="edit-page">
 
             <article class="edit-page-container">
-                <form action="{% url 'cocktail delete' slug=cocktail.slug  %}" method="post" class="edit-page-form">
+                <form action="{% url 'recipe delete' slug=recipe.slug  %}" method="post" class="edit-page-form">
 
-                    <h2>You want to delete your cocktail?</h2>
+                    <h2>You want to delete your recipe?</h2>
                     {{ form }}
                     {% csrf_token %}
                     <article class="delete-page-button">
                         <button class="btn-edit-ads">Delete</button>
                     </article>
                     <br><article class="delete-page-button">
-                        <a href="{% url 'cocktail details' slug=cocktail.slug  %}" class="btn-edit-ads">Cancel</a>
+                        <a href="{% url 'recipe details' slug=recipe.slug  %}" class="btn-edit-ads">Cancel</a>
                     </article>
                 </form>
                 <article class="edit-page-image">
                     <!-- Do not forget to change the path to the image -->
-                    <img src="{% static "img/cocktail.gif" %}" alt="image">
+                    <img src="{% static "img/recipe.jpg" %}" alt="image">
                 </article>
             </article>
 

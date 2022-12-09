@@ -1,0 +1,29 @@
+.pagination {
+  text-align: center;
+  align-content: center;
+  display: inline-block;
+}
+
+.pagination a {
+  text-align: center;
+  align-content: center;
+  font-family: 'Poppins', sans-serif;
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  font-size: 22px;
+}
+
+.pagination a.active {
+  text-align: center;
+  align-content: center;
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}

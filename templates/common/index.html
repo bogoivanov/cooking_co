@@ -6,9 +6,9 @@
 
         <section id="home-page">
             <article class="home-page-content">
-                <h1>Find The Job That Fits Your Life</h1>
-                <p>On this site, you can find hundreds of job offers, do not hesitate, and apply now.</p>
-                <a href="#" class="view-all-ads">View recipes</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <h1>Best Recipes Are Here For You</h1>
+                <p>On this site, you can find recipes and cocktails. {{ all_articles }} recipes and cocktails are here!</p>
+                <a href="{% url 'recipes all' %}" class="view-all-ads">View recipes</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="{% url 'cocktails all' %}" class="view-all-ads">View cocktails</a>
             </article>
             <article class="home-page-image">
@@ -67,7 +67,7 @@
                         <!--Put the value of the headline below-->
                         food recipes
                         <!--Put the value of the total number of candidates below-->
-                        <span>recipes: TODO</span>
+                        <span>recipes: {{ all_recipes }}</span>
                     </h5>
                 </article>
                 <!--If not show:-->

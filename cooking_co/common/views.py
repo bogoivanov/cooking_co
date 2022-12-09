@@ -6,12 +6,13 @@ from django.contrib.auth.models import User
 from django.urls import reverse_lazy, reverse
 from django.views import generic as views
 from django.shortcuts import render, redirect
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 
 from cooking_co.cocktails.models import Cocktail
 from cooking_co.common.decorators import allow_groups
-from cooking_co.common.forms import CocktailCommentForm
-from cooking_co.common.models import CocktailComment, CocktailLike
+from cooking_co.common.forms import CocktailCommentForm, RecipeCommentForm
+from cooking_co.common.models import CocktailComment, CocktailLike, RecipeLike
+from cooking_co.recipes.models import Recipe
 
 UserModel = get_user_model()
 
@@ -53,22 +54,44 @@ def like_cocktail(request, cocktail_id):
     return redirect(request.META['HTTP_REFERER'])
 
 
-# class CocktailCommentCreateView(auth_mixins.LoginRequiredMixin, views.CreateView):
-#     model = CocktailComment
-#     form_class = CocktailCommentForm
-#     success_url = reverse_lazy('index')
-#     context_object_name = 'commentform'
-#
-#     def form_valid(self, form):
-#         form.instance.user = self.request.user
-#         form.save()
-#         return super().form_valid(form)
+@login_required
+def comment_recipe(request, recipe_id):
+    recipe = Recipe.objects.filter(id=recipe_id).get()
+    form = RecipeCommentForm(request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.recipe = recipe
+        comment.user = request.user
+        comment.save()
+
+    return redirect(request.META['HTTP_REFERER'])
+
+
+@login_required
+def like_recipe(request, recipe_id):
+    user_liked_photos = RecipeLike.objects.filter(recipe_id=recipe_id, user_id=request.user.pk)
+    recipe = Recipe.objects.filter(id=recipe_id).first()
+
+    user_is_owner = recipe.user.id == request.user.pk
+
+    if user_is_owner:
+        return redirect(request.META['HTTP_REFERER'])
+    elif user_liked_photos:
+        user_liked_photos.delete()
+    else:
+        RecipeLike.objects.create(recipe_id=recipe_id, user_id=request.user.pk, )
+
+    return redirect(request.META['HTTP_REFERER'])
 
 
 class TestViewListView(LoginRequiredMixin, ListView):
     model = UserModel
     context_object_name = 'profile'
     template_name = 'common/test.html'
+
+
+class Test404View(TemplateView):
+    template_name = '404/404.html'
 
 
 class IndexViewListView(LoginRequiredMixin, ListView):
@@ -81,6 +104,8 @@ class IndexViewListView(LoginRequiredMixin, ListView):
         context['alcoholic_cocktails'] = Cocktail.objects.exclude(main_ingredient='non-alcoholic').count()
         context['non_alcoholic_cocktails'] = Cocktail.objects.filter(main_ingredient='non-alcoholic').count()
         context['all_cocktails'] = Cocktail.objects.all().count()
+        context['all_recipes'] = Recipe.objects.all().count()
+        context['all_articles'] = Cocktail.objects.all().count() + Recipe.objects.all().count()
         context['age_of_user'] = self.request.user.age
 
         # TODO when recipes
@@ -100,8 +125,11 @@ class CocktailsSearchListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         pattern = self.__get_pattern()
+
         if pattern:
             queryset = queryset.filter(cocktail_name__icontains=pattern)
+            # queryset2 = queryset.filter(main_ingredient__icontains=pattern)
+
         return queryset
 
     def __get_pattern(self):

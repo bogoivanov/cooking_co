@@ -9,8 +9,6 @@ from django.urls import reverse
 from cooking_co.accounts.helpers.get_age import get_age_profile
 from cooking_co.accounts.managers import UserManager
 from django.utils.translation import gettext_lazy as _
-from enum import Enum
-
 from django.contrib.auth import models as auth_models
 from django.core import validators
 from django.db import models

@@ -5,45 +5,42 @@
 
         <section id="all-ads-page">
             <article class="all-ads-title">
-                <h1>All cocktails</h1>
+                <h1>All recipes</h1>
             </article>
-            {% if not cocktails %}
+            {% if not recipes %}
                 <!--If there are still no job ads in the database display:-->
                 <article class="not-available-ads">
-                    <h1>No cocktails yet!</h1>
-                    <h2>Be the first who will add cocktail!</h2>
+                    <h1>No recipes yet!</h1>
+                    <h2>Be the first who will add recipe!</h2>
                 </article>
             {% else %}
 
                 <!--If there are job ads in the database, show each one-->
-                {% for cocktail in cocktails %}
+                {% for recipe in recipes %}
                     <article class="all-ads-card">
                         <article class="all-ads-card-image">
                             <!-- Do not forget to change the path to the image -->
-                            <img src="{{ cocktail.cocktail_photo }}" alt="job-icon" width="150" height="150">
+                            <img src="{{ recipe.recipe_photo }}" alt="job-icon" width="150" height="150">
                         </article>
 
                         <article class="all-ads-card-content">
                             <!--You must put the headline value in <h2>-->
-                            <h2>Cocktail name: {{ cocktail.cocktail_name }}</h2>
-                            <h3>Cocktail main ingredient: {{ cocktail.main_ingredient }}</h3>
-                            <h3>{{ cocktail.other_ingredient }}</h3>
+                            <h2>Recipe name: {{ recipe.cocktail_name }}</h2>
+                            <h3>Recipe main ingredient: {{ recipe.main_ingredient }}</h3>
+                            <h3>{{ recipe.other_ingredient }}</h3>
                         </article>
 
                         <article class="all-ads-card-buttons">
-                            <a href="{% url 'cocktail details' slug=cocktail.slug %}" class="btn-details">Details</a>
+                            <a href="{% url 'recipe details' slug=recipe.slug %}" class="btn-details">Details</a>
                         </article>
                     </article>
                 {% endfor %}
-
-
-
 
             {% endif %}
         <article class="all-ads-card">
                     <article class="all-ads-card-image">
                         <!-- Do not forget to change the path to the image -->
-                        <img src="{% static "img/cocktail-sample.png" %}" alt="job-icon" width="150" height="150">
+                        <img src="{% static "img/food-sample.png" %}" alt="job-icon" width="150" height="150">
                     </article>
 
                     <article class="all-ads-card-content">
@@ -54,8 +51,8 @@
                     </article>
 
                     <article class="all-ads-card-buttons">
-                        <a href="{% url 'cocktail create' %}"
-                           class="btn-details">Create cocktail</a>
+                        <a href="{% url 'recipe create' %}"
+                           class="btn-details">Create recipe</a>
                     </article>
                 </article>
 

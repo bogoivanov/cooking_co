@@ -20,6 +20,7 @@ from cooking_co.accounts.forms import UserCreateForm
 from cooking_co.accounts.helpers.get_age import get_age_profile
 from cooking_co.cocktails.models import Cocktail
 from cooking_co.common.models import CocktailComment, CocktailLike
+from cooking_co.recipes.models import Recipe
 
 UserModel = get_user_model()
 
@@ -65,7 +66,25 @@ class UserDetailsView(views.DetailView):
         context = super().get_context_data(**kwargs)
         context['cocktails_count'] = Cocktail.objects.filter(user_id=self.request.user.pk).count()
         context['cocktails'] = Cocktail.objects.filter(user_id=self.request.user.pk)
+
+        context['recipes_count'] = Recipe.objects.filter(user_id=self.request.user.pk).count()
+        context['recipes'] = Recipe.objects.filter(user_id=self.request.user.pk)
+
+
         context['is_owner'] = self.request.user == self.object
+        cocktails_of_user = Cocktail.objects.filter(user_id=self.request.user.pk)
+        cocktail_likes_count = sum(x.cocktaillike_set.count() for x in cocktails_of_user)
+        # recipes_of_user = Recipe.objects.filter(user_id=self.request.user.pk)
+        # recipe_likes_count = sum(x.recipelike_set.count() for x in recipes_of_user)
+        # TODO for recipes
+        recipe_likes_count = 0
+        context['total_likes_count']= cocktail_likes_count + recipe_likes_count
+
+
+        # cocktails_like =
+        # print(cocktails)
+        # cocktails_count = [int(x) for x in cocktail]
+        # context['likes_on_cocktails'] =
         # context['pets_count'] = self.object.pet_set.count()
 
         # photos = self.object.photo_set \

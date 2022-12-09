@@ -15,15 +15,29 @@ from cooking_co.core.disabled_form_mixin import DisabledFormMixin
 # - `Form` is detached from models
 
 
-
-
-
 class CocktailBaseForm(forms.ModelForm):
     class Meta:
         model = Cocktail
         # fields = '__all__' (not the case, we want to skip `slug`)
         fields = ('cocktail_name', 'main_ingredient', 'other_ingredient', 'cocktail_photo')
+        labels = {
+            'cocktail_name': 'Cocktail name',
+            'main_ingredient': 'Main ingredient',
+            'other_ingredient': 'Other ingredients',
+            'cocktail_photo': 'Cocktail photo',
+        }
 
+
+        # widgets = {
+        #
+        #
+        #     'date_of_birth': forms.DateInput(
+        #         attrs={
+        #             'placeholder': 'mm/dd/yyyy',
+        #             'type': 'date',
+        #         },
+        #     ),
+        # }
 
         # def clean(self):
         #     cleaned_data = super().clean()
@@ -31,7 +45,6 @@ class CocktailBaseForm(forms.ModelForm):
         #     main_ingredient = cleaned_data.get('main_ingredient')
         #     self._validate_unique = True
         #     return self.cleaned_data
-
 
         # exclude = ('slug',)
         # labels = {
@@ -56,15 +69,18 @@ class CocktailBaseForm(forms.ModelForm):
         #         }
         #     )
         # }
+
+
 class CocktailLittleBaseForm(CocktailBaseForm):
     pass
+
 
 class CocktailCreateForm(CocktailBaseForm):
     pass
 
+
 class CocktailEditForm(CocktailBaseForm):
     disabled_fields = ('cocktail_name',)
-
 
 # class CocktailDeleteForm(CocktailBaseForm):
 #     disabled_fields = '__all__'

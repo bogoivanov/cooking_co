@@ -52,6 +52,9 @@ class Cocktail(StrFromFieldsMixin, models.Model):
     main_ingredient = models.CharField(
         choices=INGREDIENTS,
         max_length=30,
+        default='non-alcoholic',
+        null=False,
+        blank=True,
     )
 
     other_ingredient = models.CharField(

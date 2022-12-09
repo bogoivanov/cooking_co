@@ -46,14 +46,13 @@ class CocktailCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # print(context['form']['main_ingredient'])
-
-        print(context['form'])
-        age_of_user = self.request.user.age
-        if age_of_user < 21:
-            context['form'] = CocktailLittleBaseForm
-            # print(context['form'])
-        else:
-            context['form'] = CocktailCreateForm
+        # context['form']['main_ingredient'] ='non-alcoholic'
+        for name, field in context['form'].fields.items():
+            print(name, field)
+            if name == 'main_ingredient':
+                print(field)
+                field = forms.CharField(max_length=20)
+                print(field)
         return context
 
 

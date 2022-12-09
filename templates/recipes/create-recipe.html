@@ -7,9 +7,9 @@
 
 
             <article class="register-page-container">
-                <form action="{% url 'cocktail create' %}" method="post" class="register-page-form">
-                    <h2>Cocktail</h2>
-                    <p>Create your cocktail</p>
+                <form action="{% url 'recipe create' %}" method="post" class="register-page-form">
+                    <h2>Recipe</h2>
+                    <p>Create your recipe</p>
                     {#                    <label for="password">Cocktail name:</label>#}
                     {#                    {{ form.cocktail_name }}#}
                     {##}
@@ -27,25 +27,19 @@
                     {#                    {{ form.email.errors }}#}
 
                     {% csrf_token %}
-                    <label for="cocktail_name">Cocktail name:</label>
-                    {{ form.cocktail_name }}
-                    {{ form.cocktail_name.errors }}
-                    {% if request.user.age >= 21 %}
-                        <label for="main_ingredient">Main ingredient:</label>
-                        {{ form.main_ingredient }}
-                        {{ form.main_ingredient.errors }}
-                        <label for="main_ingredient">Other ingredients:</label>
-                        {{ form.other_ingredient }}
-                        {{ form.other_ingredient.errors }}
-
-                    {% else %}
-                    <label for="main_ingredient">Ingredients:</label>
+                    <label for="recipe_name">Recipe name:</label>
+                    {{ form.recipe_name }}
+                    {{ form.recipe_name.errors }}
+                    <label for="main_ingredient">Main ingredient:</label>
+                    {{ form.main_ingredient }}
+                    {{ form.main_ingredient.errors }}
+                    <br>
+                    <label for="main_ingredient">Other ingredients:</label>
                     {{ form.other_ingredient }}
                     {{ form.other_ingredient.errors }}
-                    {% endif %}
-                    <label for="main_ingredient">Cocktail photo:</label>
-                    {{ form.cocktail_photo }}
-                    {{ form.cocktail_photo.errors }}
+                    <label for="main_ingredient">Recipe photo:</label>
+                    {{ form.recipe_photo }}
+                    {{ form.recipe_photo.errors }}
 
                     {#                    #}
                     {#                    <p class="error"> {{ field.errors }} </p>#}
@@ -65,7 +59,7 @@
 
 
                     <article class="register-page-button">
-                        <button class="btn-register">Create cocktail</button>
+                        <button class="btn-register">Create recipe</button>
                     </article>
 
 
@@ -73,7 +67,7 @@
 
                 <article class="register-page-image">
                     <!-- Do not forget to change the path to the image -->
-                    <img src="{% static "img/cocktail.gif" %}" alt="image">
+                    <img src="{% static "img/recipe.jpg" %}" alt="image">
                 </article>
             </article>
 

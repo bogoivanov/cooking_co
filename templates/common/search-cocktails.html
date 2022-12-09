@@ -4,7 +4,7 @@
     <main>
 
         <form class="search" action="{% url 'cocktails search' %}" method="GET">
-
+                {{ form }}
                 {% csrf_token %}
                 <input type="search" name="pattern" placeholder="Search cocktails">
 
