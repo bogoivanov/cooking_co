@@ -1,5 +1,6 @@
 from django.contrib.auth import forms as auth_forms, get_user_model
 from django import forms
+from django.core.exceptions import ValidationError
 
 UserModel = get_user_model()
 
@@ -22,12 +23,19 @@ class UserCreateForm(auth_forms.UserCreationForm):
 class UserEditForm(auth_forms.UserChangeForm):
     class Meta:
         model = UserModel
-        fields = '__all__'
+        fields = ('first_name', 'last_name', 'gender', 'profile_image',)
 
     widgets = {
+        'first_name': forms.TextInput(
+            attrs={
+                'placeholder': 'first name',
+            },
+        ),
+        'last_name': forms.TextInput(
+            attrs={
+                'placeholder': 'last name',
+            },
+        ),
         'gender': forms.Select(),
     }
-    # class Meta:
-    #     model = UserModel
-    #     fields = ('first_name',)
-    #     field_classes = {'email': auth_forms.UsernameField}
+

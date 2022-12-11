@@ -11,12 +11,9 @@
                 <form action="{% url 'sign up' %}" method="post" class="register-page-form">
                     <h2>Register</h2>
                     <p>Join us and find the perfect job.</p>
-{#                    <p class="error"> {{ field.errors }} </p>#}
                     <label for="email">Email:</label>
                     {{ form.email|placeholder:'email ' }}
                     {{ form.email.errors }}
-{#                    {{ form.email|placeholder: 'Email' }}#}
-
                     <label for="password">Password:</label>
                     {{ form.password1|placeholder:'password' }}
                     {{ form.password1.errors }}

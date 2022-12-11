@@ -12,6 +12,7 @@
                     <p>Welcome, login please!</p>
 
                     {{ form }}
+
                     <p class="error"> {{ field.errors }} </p>
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{{ next }}">

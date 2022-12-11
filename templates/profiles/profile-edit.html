@@ -12,15 +12,16 @@
                     <p class="error"> {{ field.errors }} </p>
                     <label for="first_name">First name:</label>
                     {{ form.first_name }}
-
+                    {{ form.first_name.errors }}
                     <label for="password">Last name:</label>
                     {{ form.last_name }}
-
+                    {{ form.last_name.errors }}
                     <label for="repeat-password">Gender:</label>
                     <br>{{ form.gender }}
 
                     <br><label for="description">Profile image:</label>
                     {{ form.profile_image }}
+                    {{ form.profile_image.errors }}
                     {% csrf_token %}
 
                     <article class="edit-page-button">

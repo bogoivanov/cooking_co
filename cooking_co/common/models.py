@@ -96,20 +96,3 @@ class RecipeLike(models.Model):
         on_delete=models.RESTRICT,
     )
 
-
-# class SearchResultMainIngredient(models.Model):
-#     NON_ALCOHOLIC = 'non-alcoholic'
-#     VODKA = 'vodka'
-#     WHISKEY = 'whiskey'
-#     LIQUORS = 'liquors'
-#     RUM = 'rum'
-#     GIN = 'gin'
-#     TEQUILA = 'tequila'
-#     INGREDIENTS = [(x, x) for x in (NON_ALCOHOLIC, VODKA, WHISKEY, LIQUORS, RUM, GIN, TEQUILA)]
-#
-#     main_ingredient = models.CharField(
-#         choices=INGREDIENTS,
-#         max_length=30,
-#         null=True,
-#         blank=True,
-#     )

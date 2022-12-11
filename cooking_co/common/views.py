@@ -107,7 +107,8 @@ class IndexViewListView(LoginRequiredMixin, ListView):
         context['all_recipes'] = Recipe.objects.all().count()
         context['all_articles'] = Cocktail.objects.all().count() + Recipe.objects.all().count()
         context['age_of_user'] = self.request.user.age
-
+        context['all_articles_without_alcohol'] = Cocktail.objects.filter(
+            main_ingredient='non-alcoholic').count() + Recipe.objects.all().count()
         # TODO when recipes
         return context
 
@@ -120,20 +121,20 @@ class CocktailsSearchListView(LoginRequiredMixin, ListView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['pattern'] = self.__get_pattern()
+
         return context
 
     def get_queryset(self):
         queryset = super().get_queryset()
         pattern = self.__get_pattern()
-
+        print(queryset)
+        if self.request.user.age < 21:
+            queryset = queryset.filter(main_ingredient__icontains='non-alcoholic')
         if pattern:
             search_by_name_cocktail = queryset.filter(cocktail_name__icontains=pattern)
             search_by_main_ingredient_cocktail = queryset.filter(main_ingredient__icontains=pattern)
-            search_by_main_ingredient_recipe = Recipe.objects.all().filter(main_ingredient__icontains=pattern)
             queryset = search_by_name_cocktail | search_by_main_ingredient_cocktail
-            # queryset = chain(search_by_name_cocktail, search_by_main_ingredient_cocktail, search_by_main_ingredient_recipe)
         return queryset
-
 
     def __get_pattern(self):
         pattern = self.request.GET.get('pattern', None)

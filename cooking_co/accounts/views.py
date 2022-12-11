@@ -11,15 +11,14 @@ from django.contrib.auth import mixins as auth_mixins, get_user_model
 from django import forms
 from django.contrib.auth import forms as auth_forms, login, get_user_model
 from django.contrib.auth import views as auth_views
-from django.contrib.auth.models import User
-from django.shortcuts import render
+
 from django.urls import reverse_lazy
 from django.views import generic as views
 
-from cooking_co.accounts.forms import UserCreateForm
+from cooking_co.accounts.forms import UserCreateForm, UserEditForm
 from cooking_co.accounts.helpers.get_age import get_age_profile
 from cooking_co.cocktails.models import Cocktail
-from cooking_co.common.models import CocktailComment, CocktailLike
+from cooking_co.common.models import CocktailComment, CocktailLike, RecipeComment, RecipeLike
 from cooking_co.recipes.models import Recipe
 
 UserModel = get_user_model()
@@ -105,6 +104,8 @@ class UserDeleteView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     def form_valid(self, form):
         CocktailComment.objects.filter(user_id=self.object.id).delete()
         CocktailLike.objects.filter(user_id=self.object.id).delete()
+        RecipeComment.objects.filter(user_id=self.object.id).delete()
+        RecipeLike.objects.filter(user_id=self.object.id).delete()
         success_url = self.get_success_url()
         self.object.delete()
         return HttpResponseRedirect(success_url)

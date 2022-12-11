@@ -26,7 +26,23 @@ class CocktailBaseForm(forms.ModelForm):
             'other_ingredient': 'Other ingredients',
             'cocktail_photo': 'Cocktail photo',
         }
-
+        widgets = {
+            'cocktail_name': forms.TextInput(
+                attrs={
+                    'placeholder': 'cocktail name'
+                }
+            ),
+            'other_ingredient': forms.TextInput(
+                attrs={
+                    'placeholder': 'other ingredients',
+                }
+            ),
+            'cocktail_photo': forms.URLInput(
+                attrs={
+                    'placeholder': 'cocktail image',
+                }
+            )
+        }
 
         # widgets = {
         #

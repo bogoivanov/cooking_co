@@ -10,3 +10,4 @@ def validate_file_less_than_5mb(file_object):
     megabyte_limit = 5.0
     if filesize > megabytes_to_bytes(megabyte_limit):
         raise ValidationError(f'Max file size is {megabyte_limit}MB')
+

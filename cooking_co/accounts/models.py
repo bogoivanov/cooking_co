@@ -1,13 +1,16 @@
-from django.db import models
-
 from cooking_co.accounts.helpers.get_age import get_age_profile
 from cooking_co.accounts.managers import UserManager
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import models as auth_models
 from django.core import validators
 from django.db import models
-
+from cooking_co.accounts.validators.validate_age_over_16 import at_least_16
+from cooking_co.accounts.validators.validate_birthdate_not_in_past import birthday_not_in_past
 from cooking_co.accounts.validators.validate_image_size import validate_file_less_than_5mb
+from cooking_co.accounts.validators.validate_only_letters import validate_only_letters
+
+
+
 
 
 class AppUser(auth_models.AbstractUser):
@@ -28,7 +31,7 @@ class AppUser(auth_models.AbstractUser):
         max_length=MAX_LEN_FIRST_NAME,
         validators=(
             validators.MinLengthValidator(MIN_LEN_FIRST_NAME),
-
+            validate_only_letters,
         )
     )
 
@@ -36,7 +39,7 @@ class AppUser(auth_models.AbstractUser):
         max_length=MAX_LEN_LAST_NAME,
         validators=(
             validators.MinLengthValidator(MIN_LEN_LAST_NAME),
-
+            validate_only_letters,
         )
     )
     profile_image = models.ImageField(
@@ -54,6 +57,7 @@ class AppUser(auth_models.AbstractUser):
     )
 
     date_of_birth = models.DateField(
+        validators=(birthday_not_in_past,at_least_16,),
     )
 
     age = models.IntegerField(
@@ -65,6 +69,12 @@ class AppUser(auth_models.AbstractUser):
         super().save(*args, **kwargs)
         self.age = get_age_profile(self.date_of_birth)
         return super().save(*args, **kwargs)
+
+
+
+
+
+
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['date_of_birth', ]

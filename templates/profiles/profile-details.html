@@ -62,9 +62,7 @@
 
         {#        TODO#}
         <section id="all-ads-page">
-            <article class="all-ads-title">
-                <h1>All your cocktails count: {{ cocktails_count }}</h1>
-            </article>
+
             {% if not cocktails %}
                 <!--If there are still no job ads in the database display:-->
                 <article class="not-available-ads">
@@ -73,7 +71,9 @@
 
                 </article>
             {% else %}
-
+                <article class="all-ads-title">
+                    <h1>All your cocktails count: {{ cocktails_count }}</h1>
+                </article>
                 <!--If there are job ads in the database, show each one-->
                 {% for cocktail in cocktails %}
                     <article class="all-ads-card">
@@ -134,9 +134,7 @@
         </section>-->
         {#        TODO#}
         <section id="all-ads-page">
-            <article class="all-ads-title">
-                <h1>All your recipes count: {{ recipes_count }}</h1>
-            </article>
+
             {% if not recipes %}
                 <!--If there are still no job ads in the database display:-->
                 <article class="not-available-ads">
@@ -145,7 +143,9 @@
 
                 </article>
             {% else %}
-
+                <article class="all-ads-title">
+                    <h1>All your recipes count: {{ recipes_count }}</h1>
+                </article>
                 <!--If there are job ads in the database, show each one-->
                 {% for recipe in recipes %}
                     <article class="all-ads-card">

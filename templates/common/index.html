@@ -5,12 +5,24 @@
     <main>
 
         <section id="home-page">
+
+            {% if request.user.age < 21 %}
+            <article class="home-page-content">
+                <h1>Best Recipes Are Here For You</h1>
+                <p>On this site, you can find recipes and cocktails. {{ all_articles_without_alcohol }} recipes and cocktails are here!</p>
+                <a href="{% url 'recipes all' %}" class="view-all-ads">View recipes</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="{% url 'cocktails all' %}" class="view-all-ads">View cocktails</a>
+            </article>
+            {% else %}
             <article class="home-page-content">
                 <h1>Best Recipes Are Here For You</h1>
                 <p>On this site, you can find recipes and cocktails. {{ all_articles }} recipes and cocktails are here!</p>
                 <a href="{% url 'recipes all' %}" class="view-all-ads">View recipes</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="{% url 'cocktails all' %}" class="view-all-ads">View cocktails</a>
             </article>
+            {% endif %}
+
+
             <article class="home-page-image">
                 <!-- Do not forget to change the path to the image -->
                 <img src="{% static "/img/man.png" %}" alt="man">

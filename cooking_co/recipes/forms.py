@@ -13,7 +13,23 @@ class RecipeBaseForm(forms.ModelForm):
             'other_ingredient': 'Other ingredients',
             'recipe_photo': 'Recipe photo',
         }
-
+        widgets = {
+            'recipe_name': forms.TextInput(
+                attrs={
+                    'placeholder': 'recipe name'
+                }
+            ),
+            'other_ingredient': forms.TextInput(
+                attrs={
+                    'placeholder': 'other ingredients',
+                }
+            ),
+            'recipe_photo': forms.URLInput(
+                attrs={
+                    'placeholder': 'recipe image',
+                }
+            )
+        }
         # widgets = {
         #
         #

@@ -7,21 +7,21 @@
 
 
             <article class="register-page-container">
-                <form action="{% url 'recipe edit' slug=recipe.slug  %}"  method="post" class="register-page-form">
+                <form action="{% url 'recipe edit' slug=recipe.slug %}" method="post" class="register-page-form">
                     <h2>Recipe</h2>
                     <p>Edit your recipe</p>
-{#                    <label for="password">Cocktail name:</label>#}
-{#                    {{ form.cocktail_name }}#}
-{##}
-{#                    <label for="password">Main Ingredient:</label>#}
-{#                    {{ form.main_ingidient }}#}
-{##}
-{#                    <label for="repeat-password">Gender:</label>#}
-{#                    <br>{{ form.gender }}#}
-{##}
-{#                    <br><label for="description">Cocktail image:</label>#}
-{#                    {{ form.cocktail_photo }}#}
-                    {% csrf_token %}
+                    {#                    <label for="password">Cocktail name:</label>#}
+                    {#                    {{ form.cocktail_name }}#}
+                    {##}
+                    {#                    <label for="password">Main Ingredient:</label>#}
+                    {#                    {{ form.main_ingidient }}#}
+                    {##}
+                    {#                    <label for="repeat-password">Gender:</label>#}
+                    {#                    <br>{{ form.gender }}#}
+                    {##}
+                    {#                    <br><label for="description">Cocktail image:</label>#}
+                    {#                    {{ form.cocktail_photo }}#}
+
                     <label for="recipe_name">Recipe name:</label>
                     {{ form.recipe_name }}
                     {{ form.cocktail_name.errors }}
@@ -35,6 +35,7 @@
                     <label for="main_ingredient">Recipe photo:</label>
                     {{ form.recipe_photo }}
                     {{ form.recipe_photo.errors }}
+                    {% csrf_token %}
                     {#                    #}
                     {#                    <p class="error"> {{ field.errors }} </p>#}
                     {#                    <label for="email">Email:</label>#}
@@ -49,7 +50,7 @@
                     {#                    <label for="description">Enter your date of birth:</label>#}
                     {#                    {{ form.date_of_birth }}#}
                     {#                    #}
-{#                    {{ form.user == user_id }}#}
+                    {#                    {{ form.user == user_id }}#}
 
 
                     <article class="register-page-button">

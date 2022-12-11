@@ -42,6 +42,7 @@
                     <label for="main_ingredient">Cocktail photo:</label>
                     {{ form.cocktail_photo }}
                     {{ form.cocktail_photo.errors }}
+                    {% csrf_token %}
                     {#                    #}
                     {#                    <p class="error"> {{ field.errors }} </p>#}
                     {#                    <label for="email">Email:</label>#}
