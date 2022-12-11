@@ -7,7 +7,7 @@ from django.urls import reverse_lazy, reverse
 from django.views import generic as views
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, TemplateView
-
+from itertools import chain
 from cooking_co.cocktails.models import Cocktail
 from cooking_co.common.decorators import allow_groups
 from cooking_co.common.forms import CocktailCommentForm, RecipeCommentForm
@@ -127,10 +127,13 @@ class CocktailsSearchListView(LoginRequiredMixin, ListView):
         pattern = self.__get_pattern()
 
         if pattern:
-            queryset = queryset.filter(cocktail_name__icontains=pattern)
-            # queryset2 = queryset.filter(main_ingredient__icontains=pattern)
-
+            search_by_name_cocktail = queryset.filter(cocktail_name__icontains=pattern)
+            search_by_main_ingredient_cocktail = queryset.filter(main_ingredient__icontains=pattern)
+            search_by_main_ingredient_recipe = Recipe.objects.all().filter(main_ingredient__icontains=pattern)
+            queryset = search_by_name_cocktail | search_by_main_ingredient_cocktail
+            # queryset = chain(search_by_name_cocktail, search_by_main_ingredient_cocktail, search_by_main_ingredient_recipe)
         return queryset
+
 
     def __get_pattern(self):
         pattern = self.request.GET.get('pattern', None)

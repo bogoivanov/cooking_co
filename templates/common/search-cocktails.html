@@ -4,9 +4,9 @@
     <main>
 
         <form class="search" action="{% url 'cocktails search' %}" method="GET">
-                {{ form }}
-                {% csrf_token %}
-                <input type="search" name="pattern" placeholder="Search cocktails">
+            {{ form }}
+            {% csrf_token %}
+            <input type="search" name="pattern" placeholder="Search cocktails"></input>
 
             <button type="submit" class="btn-search">
                 <!-- Do not forget to change the path to the image -->
@@ -16,19 +16,23 @@
         </form>
 
         <section id="search-page">
+            {% if cocktails %}
+                <h2>Search result:</h2>
+                <!--If there are a search matches, show each ad-->
+                {% for cocktail in cocktails %}
+                    <!--If there are a search matches, show each ad-->
+                    <article class="search-page-result">
+                        <p class="search-page-result-headline"> Cocktail name: {{ cocktail.cocktail_name }}</p>
+                        <article class="details-page-card-buttons">
+                            <a href="{% url 'cocktail details' slug=cocktail.slug %}" class="btn-edit">Details</a>
+                        </article>
+                    </article>
+                {% endfor %}
 
-            <h2>Search result:</h2>
-            <!--If there are a search matches, show each ad-->
-            {% for cocktail in cocktails %}
 
-            <!--If there are a search matches, show each ad-->
-            <article class="search-page-result">
-                <p class="search-page-result-headline"> Cocktail name: {{ cocktail.cocktail_name }}</p>
-                <article class="details-page-card-buttons">
-                    <a href="{% url 'cocktail details' slug=cocktail.slug %}" class="btn-edit">Details</a>
-                </article>
-            </article>
-        {% endfor %}
+            {% else %}
+                <h2>No match found</h2>
+            {% endif %}
             <!--If not show:-->
             <!--<article class="search-page-no-result">
                 <p class="search-page-no-result-message">No match found.</p>

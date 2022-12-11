@@ -19,7 +19,6 @@ class StrFromFieldsMixin:
 
 
 class Cocktail(StrFromFieldsMixin, models.Model):
-    str_fields = ('id', 'cocktail_name')
     MIN_NAME = 2
     MAX_NAME = 30
     NON_ALCOHOLIC = 'non-alcoholic'
