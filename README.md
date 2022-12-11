@@ -41,5 +41,5 @@ There they will get detailed information about the recipe and will be able to li
 When the user goes to ‘Search’ page he will see all the cocktail recipes or only non-alcoholic if he is not 21 years old. 
 It will list cocktail recipes that match the search.
 – Admin part
-There are superusers and groups of users “Staff” with full CRUD and
-“Moderators” with CRUD on cocktails and recipes, comments and likes.
+There are superusers and groups of users “StaffCC” with full CRUD and
+“ModeratorsCC” with CRUD on cocktails and recipes, comments and likes.
