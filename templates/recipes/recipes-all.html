@@ -5,7 +5,7 @@
 
         <section id="all-ads-page">
             <article class="all-ads-title">
-                <h1>All recipes</h1>
+                <h1>All recipes {{ recipes_count }}</h1>
             </article>
             {% if not recipes %}
                 <!--If there are still no job ads in the database display:-->
@@ -37,24 +37,26 @@
                 {% endfor %}
 
             {% endif %}
-        <article class="all-ads-card">
-                    <article class="all-ads-card-image">
-                        <!-- Do not forget to change the path to the image -->
-                        <img src="{% static "img/food-sample.png" %}" alt="job-icon" width="150" height="150">
-                    </article>
 
-                    <article class="all-ads-card-content">
-                        <!--You must put the headline value in <h2>-->
-                        <h2></h2>
-                        <h3></h3>
-                        <h3></h3>
-                    </article>
 
-                    <article class="all-ads-card-buttons">
-                        <a href="{% url 'recipe create' %}"
-                           class="btn-details">Create recipe</a>
-                    </article>
+            <article class="all-ads-card">
+                <article class="all-ads-card-image">
+                    <!-- Do not forget to change the path to the image -->
+                    <img src="{% static "img/food-sample.png" %}" alt="job-icon" width="150" height="150">
                 </article>
+
+                <article class="all-ads-card-content">
+                    <!--You must put the headline value in <h2>-->
+                    <h2></h2>
+                    <h3></h3>
+                    <h3></h3>
+                </article>
+
+                <article class="all-ads-card-buttons">
+                    <a href="{% url 'recipe create' %}"
+                       class="btn-details">Create recipe</a>
+                </article>
+            </article>
 
 
             <div class="pagination">

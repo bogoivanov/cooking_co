@@ -1,40 +1,32 @@
-from django import forms
-from django.contrib.auth import get_user_model, login
-from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.forms import modelform_factory
-from django.http import HttpResponseRedirect, request
-from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views import generic as views
-from django.contrib.auth import mixins as auth_mixins, get_user_model
-from django.views.generic import CreateView, UpdateView, DetailView, DeleteView
-
-from cooking_co.accounts.helpers.get_age import get_age_profile
-from cooking_co.cocktails.forms import CocktailCreateForm, CocktailLittleBaseForm
-from cooking_co.cocktails.models import Cocktail
-from cooking_co.common.forms import CocktailCommentForm, RecipeCommentForm
-from cooking_co.common.models import CocktailComment, CocktailLike, RecipeComment, RecipeLike
+from django.contrib.auth import get_user_model
+from django.views.generic import CreateView, UpdateView, DetailView, DeleteView, ListView
+from cooking_co.common.forms import RecipeCommentForm
+from cooking_co.common.models import RecipeComment, RecipeLike
 from cooking_co.recipes.forms import RecipeCreateForm
 from cooking_co.recipes.models import Recipe
 
 UserModel = get_user_model()
 
 
-class RecipesViewListView(LoginRequiredMixin, views.ListView):
-    paginate_by = 5
-    context_object_name = 'recipes'  # renames `object_list` to `employees`
+class RecipesViewListView(LoginRequiredMixin, ListView):
+    paginate_by = 3
+    context_object_name = 'recipes'
     model = Recipe
-    template_name = 'recipes/recipes-all.html'  # web/employee_list.html
-
-
-
+    template_name = 'recipes/recipes-all.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['recipes_count'] = self.object_list.all().count()
+        return context
 
 class RecipeCreateView(CreateView):
     template_name = 'recipes/create-recipe.html'
     model = Recipe
     form_class = RecipeCreateForm
     success_url = reverse_lazy('recipes all')
+
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.save()
@@ -68,7 +60,6 @@ class RecipeDetailView(DetailView):
         context['form'] = RecipeCommentForm
         context['is_owner'] = self.request.user.pk == self.object.user_id
         return context
-
 
 
 class RecipeDeleteView(LoginRequiredMixin, DeleteView):

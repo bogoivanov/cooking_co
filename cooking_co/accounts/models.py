@@ -10,10 +10,9 @@ from cooking_co.accounts.validators.validate_image_size import validate_file_les
 from cooking_co.accounts.validators.validate_only_letters import validate_only_letters
 
 
-
-
-
 class AppUser(auth_models.AbstractUser):
+
+
     MIN_LEN_FIRST_NAME = 2
     MAX_LEN_FIRST_NAME = 30
     MIN_LEN_LAST_NAME = 2
@@ -57,7 +56,7 @@ class AppUser(auth_models.AbstractUser):
     )
 
     date_of_birth = models.DateField(
-        validators=(birthday_not_in_past,at_least_16,),
+        validators=(birthday_not_in_past, at_least_16,),
     )
 
     age = models.IntegerField(
@@ -69,12 +68,6 @@ class AppUser(auth_models.AbstractUser):
         super().save(*args, **kwargs)
         self.age = get_age_profile(self.date_of_birth)
         return super().save(*args, **kwargs)
-
-
-
-
-
-
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['date_of_birth', ]

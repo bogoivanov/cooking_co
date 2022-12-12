@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 from pathlib import Path
-
 from django.urls import reverse_lazy
 import psycopg2
 
@@ -87,12 +86,6 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -145,10 +138,23 @@ MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# # Change user model
+# Change user model
 AUTH_USER_MODEL = 'accounts.AppUser'
 
-#
 LOGIN_URL = reverse_lazy('sign in')
 LOGIN_REDIRECT_URL = reverse_lazy('index')
 # LOGOUT_REDIRECT_URL = reverse_lazy('index')
+
+if DEBUG:
+    EMAIL_HOST = 'in-v3.mailjet.com'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = 'cooking.coach10@gmail.com'
+    EMAIL_HOST_PASSWORD = 'Cooking1234.'
+# else:
+    EMAIL_BACKEND = 'django_mailjet.backends.MailjetBackend'
+    MAILJET_API_KEY = 'b9aac7e19efe27f6c3469a1bfe0377e4'
+    MAILJET_API_SECRET = '34996fda54f5f7fc3b3fcfeced53cffd'
+
+DEFAULT_FROM_EMAIL = 'cooking.coach10@gmail.com'
+

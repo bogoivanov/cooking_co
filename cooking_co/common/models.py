@@ -38,8 +38,6 @@ class CocktailComment(models.Model):
 
 
 class CocktailLike(models.Model):
-    # Photo's field for likes is named `{NAME_OF_THIS_MODEL.lower()}_set`
-
     cocktail = models.ForeignKey(
         Cocktail,
         on_delete=models.RESTRICT,
@@ -95,4 +93,3 @@ class RecipeLike(models.Model):
         UserModel,
         on_delete=models.RESTRICT,
     )
-

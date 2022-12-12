@@ -6,17 +6,17 @@
 
         <section id="home-page">
 
-            {% if request.user.age < 21 %}
+            {% if age_of_user < 21 %}
             <article class="home-page-content">
                 <h1>Best Recipes Are Here For You</h1>
-                <p>On this site, you can find recipes and cocktails. {{ all_articles_without_alcohol }} recipes and cocktails are here!</p>
+                <p>On this site, you can find {{ all_articles_without_alcohol }} recipes and cocktails!</p>
                 <a href="{% url 'recipes all' %}" class="view-all-ads">View recipes</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="{% url 'cocktails all' %}" class="view-all-ads">View cocktails</a>
             </article>
             {% else %}
             <article class="home-page-content">
                 <h1>Best Recipes Are Here For You</h1>
-                <p>On this site, you can find recipes and cocktails. {{ all_articles }} recipes and cocktails are here!</p>
+                <p>On this site, you can find {{ all_articles }} recipes and cocktails!</p>
                 <a href="{% url 'recipes all' %}" class="view-all-ads">View recipes</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <a href="{% url 'cocktails all' %}" class="view-all-ads">View cocktails</a>
             </article>
@@ -25,7 +25,7 @@
 
             <article class="home-page-image">
                 <!-- Do not forget to change the path to the image -->
-                <img src="{% static "/img/man.png" %}" alt="man">
+                <img src="{% static "/img/waitresses.png" %}" alt="man">
             </article>
         </section>
 
@@ -33,7 +33,7 @@
             <article class="intro-left-side">
                 <article class="intro-left-side-image">
                     <!-- Do not forget to change the path to the image -->
-                    <img src="{% static "img/people-group.png" %}" alt="people">
+                    <img src="{% static "img/left-waitress.png" %}" alt="people">
                 </article>
                 <article class="intro-left-side-text">
                     <h1>Here you will find the best recipes and cocktails!</h1>
@@ -47,7 +47,7 @@
             </article>
 
             <article class="intro-right-side">
-                {% if age_of_user > 21 %}
+                {% if age_of_user >= 21 %}
                     <!--If there are job ads in the database, show them (max 3)-->
                     <article class="intro-right-side-content">
                         <!-- Do not forget to change the path to the image -->
@@ -90,28 +90,3 @@
     </main>
 
 {% endblock %}
-{#<!DOCTYPE html>#}
-{#<html lang="en">#}
-{#<head>#}
-{#    <meta charset="UTF-8">#}
-{#    <title>Title</title>#}
-{#</head>#}
-{#<body>#}
-{##}
-{##}
-{#{% if user == request.user %}#}
-{#    <strong>{{ user.email }}</strong>#}
-{#{% endif %}#}
-{#{% for user in object_list %}#}
-{#    <li>#}
-{#        {{ user.email }}#}
-{#    </li>#}
-{#{% endfor %}#}
-{##}
-{##}
-{##}
-{#<a href="{% url 'profile details' pk=user.pk %}" class="details-btn">Details</a>#}
-{#<a href="{% url 'profile edit' pk=user.pk %}" class="details-btn">Edit</a>#}
-
-</body>
-</html>

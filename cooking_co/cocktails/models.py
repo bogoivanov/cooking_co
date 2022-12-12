@@ -57,7 +57,7 @@ class Cocktail(StrFromFieldsMixin, models.Model):
     )
 
     other_ingredient = models.CharField(
-        max_length=30,
+        max_length=60,
     )
 
     user = models.ForeignKey(
@@ -71,11 +71,9 @@ class Cocktail(StrFromFieldsMixin, models.Model):
         return f"{self.cocktail_name} with {self.id}"
 
     def save(self, *args, **kwargs):
-        # Create/Update
         super().save(*args, **kwargs)
         if not self.slug:
             self.slug = slugify(f'{self.cocktail_name}-{self.id}')
-        # Update
         return super().save(*args, **kwargs)
 
     class Meta:

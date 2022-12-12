@@ -10,21 +10,7 @@
                 <form action="{% url 'cocktail create' %}" method="post" class="register-page-form">
                     <h2>Cocktail</h2>
                     <p>Create your cocktail</p>
-                    {#                    <label for="password">Cocktail name:</label>#}
-                    {#                    {{ form.cocktail_name }}#}
-                    {##}
-                    {#                    <label for="password">Main Ingredient:</label>#}
-                    {#                    {{ form.main_ingidient }}#}
-                    {##}
-                    {#                    <label for="repeat-password">Gender:</label>#}
-                    {#                    <br>{{ form.gender }}#}
-                    {##}
-                    {#                    <br><label for="description">Cocktail image:</label>#}
-                    {#                    {{ form.cocktail_photo }}#}
-                    {#                    {% csrf_token %}#}
-                    {#                <label for="email">Email:</label>#}
-                    {#                    {{ form.email|placeholder:'email' }}#}
-                    {#                    {{ form.email.errors }}#}
+
 
                     {% csrf_token %}
                     <label for="cocktail_name">Cocktail name:</label>
@@ -39,31 +25,14 @@
                         {{ form.other_ingredient.errors }}
 
                     {% else %}
-                    <label for="main_ingredient">Ingredients:</label>
-                    {{ form.other_ingredient }}
-                    {{ form.other_ingredient.errors }}
+                        <label for="main_ingredient">Ingredients:</label>
+                        {{ form.other_ingredient }}
+                        {{ form.other_ingredient.errors }}
                     {% endif %}
                     <label for="main_ingredient">Cocktail photo:</label>
                     {{ form.cocktail_photo }}
                     {{ form.cocktail_photo.errors }}
-
-                    {#                    #}
-                    {#                    <p class="error"> {{ field.errors }} </p>#}
-                    {#                    <label for="email">Email:</label>#}
-                    {#                    {{ form.email }}#}
-                    {##}
-                    {#                    <label for="password">Password:</label>#}
-                    {#                    {{ form.password1 }}#}
-                    {##}
-                    {#                    <label for="repeat-password">Repeat Password:</label>#}
-                    {#                    {{ form.password2 }}#}
-                    {##}
-                    {#                    <label for="description">Enter your date of birth:</label>#}
-                    {#                    {{ form.date_of_birth }}#}
-                    {#                    #}
-                    {#                    {{ form.user == user_id }}#}
-
-
+bogo
                     <article class="register-page-button">
                         <button class="btn-register">Create cocktail</button>
                     </article>

@@ -10,17 +10,7 @@
                 <form action="{% url 'recipe edit' slug=recipe.slug %}" method="post" class="register-page-form">
                     <h2>Recipe</h2>
                     <p>Edit your recipe</p>
-                    {#                    <label for="password">Cocktail name:</label>#}
-                    {#                    {{ form.cocktail_name }}#}
-                    {##}
-                    {#                    <label for="password">Main Ingredient:</label>#}
-                    {#                    {{ form.main_ingidient }}#}
-                    {##}
-                    {#                    <label for="repeat-password">Gender:</label>#}
-                    {#                    <br>{{ form.gender }}#}
-                    {##}
-                    {#                    <br><label for="description">Cocktail image:</label>#}
-                    {#                    {{ form.cocktail_photo }}#}
+
 
                     <label for="recipe_name">Recipe name:</label>
                     {{ form.recipe_name }}
@@ -36,22 +26,6 @@
                     {{ form.recipe_photo }}
                     {{ form.recipe_photo.errors }}
                     {% csrf_token %}
-                    {#                    #}
-                    {#                    <p class="error"> {{ field.errors }} </p>#}
-                    {#                    <label for="email">Email:</label>#}
-                    {#                    {{ form.email }}#}
-                    {##}
-                    {#                    <label for="password">Password:</label>#}
-                    {#                    {{ form.password1 }}#}
-                    {##}
-                    {#                    <label for="repeat-password">Repeat Password:</label>#}
-                    {#                    {{ form.password2 }}#}
-                    {##}
-                    {#                    <label for="description">Enter your date of birth:</label>#}
-                    {#                    {{ form.date_of_birth }}#}
-                    {#                    #}
-                    {#                    {{ form.user == user_id }}#}
-
 
                     <article class="register-page-button">
                         <button class="btn-register">Edit recipe</button>

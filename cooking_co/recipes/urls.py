@@ -7,7 +7,7 @@ from cooking_co.recipes.views import RecipesViewListView, RecipeCreateView, Reci
 urlpatterns = [
     path('all_recipes/', RecipesViewListView.as_view(), name='recipes all'),
     path('add-recipe/', RecipeCreateView.as_view(), name='recipe create'),
-    path('/<slug:slug>/', include([
+    path('<slug:slug>/', include([
         path('redipe-details/', RecipeDetailView.as_view(), name='recipe details'),
         path('redipe-edit/', RecipeEditView.as_view(), name='recipe edit'),
         path('redipe-delete/', RecipeDeleteView.as_view(), name='recipe delete'),

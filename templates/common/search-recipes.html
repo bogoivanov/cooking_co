@@ -3,10 +3,10 @@
 {% block page_content %}
     <main>
 
-        <form class="search" action="{% url 'cocktails search' %}" method="GET">
+        <form class="search" action="{% url 'recipes search' %}" method="GET">
             {{ form }}
             {% csrf_token %}
-            <input type="search" name="pattern" placeholder="Search cocktails"></input>
+            <input type="search" name="pattern" placeholder="Search recipes"></input>
 
             <button type="submit" class="btn-search">
                 <!-- Do not forget to change the path to the image -->
@@ -16,15 +16,15 @@
         </form>
 
         <section id="search-page">
-            {% if cocktails %}
+            {% if recipes %}
                 <h2>Search result:</h2>
                 <!--If there are a search matches, show each ad-->
-                {% for cocktail in cocktails %}
+                {% for recipe in recipes %}
                     <!--If there are a search matches, show each ad-->
                     <article class="search-page-result">
-                        <p class="search-page-result-headline"> Cocktail name: {{ cocktail.cocktail_name }}</p>
+                        <p class="search-page-result-headline"> Recipe name: {{ recipe.recipe_name }}</p>
                         <article class="details-page-card-buttons">
-                            <a href="{% url 'cocktail details' slug=cocktail.slug %}" class="btn-edit">Details</a>
+                            <a href="{% url 'recipe details' slug=recipe.slug %}" class="btn-edit">Details</a>
                         </article>
                     </article>
                 {% endfor %}

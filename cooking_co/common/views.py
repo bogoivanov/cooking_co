@@ -1,29 +1,19 @@
-from django import forms
-from django.contrib.auth import mixins as auth_mixins, get_user_model
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
-from django.urls import reverse_lazy, reverse
-from django.views import generic as views
+from django.contrib.auth.models import AnonymousUser
+from django.http import request
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, TemplateView
-from itertools import chain
 from cooking_co.cocktails.models import Cocktail
 from cooking_co.common.decorators import allow_groups
 from cooking_co.common.forms import CocktailCommentForm, RecipeCommentForm
-from cooking_co.common.models import CocktailComment, CocktailLike, RecipeLike
+from cooking_co.common.models import CocktailLike, RecipeLike
 from cooking_co.recipes.models import Recipe
 
 UserModel = get_user_model()
 
 
-# @login_required
-
-# def get_cocktail_url(request, cocktail_id):
-#     print(request.META['HTTP_REFERER'])
-#     return request.META['HTTP_REFERER'] + f'{cocktail_id}' + f'/cocktail-details/'
-# http://127.0.0.1:8000/cocktails/margaritha-1/cocktail-details/
-# http://127.0.0.1:8000/cocktails/margaritha-1/cocktail-details/1/cocktail-details/
 @login_required
 def comment_cocktail(request, cocktail_id):
     cocktail = Cocktail.objects.filter(id=cocktail_id).get()
@@ -94,7 +84,7 @@ class Test404View(TemplateView):
     template_name = '404/404.html'
 
 
-class IndexViewListView(LoginRequiredMixin, ListView):
+class IndexViewListView(ListView):
     model = UserModel
     context_object_name = 'profile'
     template_name = 'common/index.html'
@@ -106,10 +96,12 @@ class IndexViewListView(LoginRequiredMixin, ListView):
         context['all_cocktails'] = Cocktail.objects.all().count()
         context['all_recipes'] = Recipe.objects.all().count()
         context['all_articles'] = Cocktail.objects.all().count() + Recipe.objects.all().count()
-        context['age_of_user'] = self.request.user.age
+        if self.request.user.is_anonymous:
+            context['age_of_user'] = 0
+        else:
+            context['age_of_user'] = self.request.user.age
         context['all_articles_without_alcohol'] = Cocktail.objects.filter(
             main_ingredient='non-alcoholic').count() + Recipe.objects.all().count()
-        # TODO when recipes
         return context
 
 
@@ -121,13 +113,11 @@ class CocktailsSearchListView(LoginRequiredMixin, ListView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context['pattern'] = self.__get_pattern()
-
         return context
 
     def get_queryset(self):
         queryset = super().get_queryset()
         pattern = self.__get_pattern()
-        print(queryset)
         if self.request.user.age < 21:
             queryset = queryset.filter(main_ingredient__icontains='non-alcoholic')
         if pattern:
@@ -141,8 +131,31 @@ class CocktailsSearchListView(LoginRequiredMixin, ListView):
         return pattern.lower() if pattern else None
 
 
-# TODO when finish
-# @allow_groups(groups=['Users statistics'])
+class RecipesSearchListView(LoginRequiredMixin, ListView):
+    model = Recipe
+    context_object_name = 'recipes'
+    template_name = 'common/search-recipes.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['pattern'] = self.__get_pattern()
+        return context
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        pattern = self.__get_pattern()
+        if pattern:
+            search_by_name_recipe = queryset.filter(recipe_name__icontains=pattern)
+            search_by_main_ingredient_recipe = queryset.filter(main_ingredient__icontains=pattern)
+            queryset = search_by_name_recipe | search_by_main_ingredient_recipe
+        return queryset
+
+    def __get_pattern(self):
+        pattern = self.request.GET.get('pattern', None)
+        return pattern.lower() if pattern else None
+
+
+@allow_groups(groups=['StaffCC'])
 def users_list(request):
     users = UserModel.objects.all()
     context = {
@@ -150,9 +163,3 @@ def users_list(request):
     }
 
     return render(request, 'common/users.html', context, )
-# TODO when finish
-# @allow_groups(groups=['Staff'])
-# class UsersViewListView(views.ListView):
-#     model = UserModel
-#     context_object_name = 'users'
-#     template_name = 'common/users.html'

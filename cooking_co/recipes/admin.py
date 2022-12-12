@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-from cooking_co.cocktails.models import Cocktail
 from cooking_co.recipes.models import Recipe
 
 

@@ -79,24 +79,24 @@ main {
     color: rgb(66, 66, 66);
 }
 
-.header-nav-list-item.active {
-    background: rgb(255, 97, 88);
-}
+/*.header-nav-list-item.active {*/
+/*    background: rgb(241, 28, 16);*/
+/*}*/
 
-.header-nav-list-item-link.active {
-    color: rgb(247, 247, 247);
-}
+/*.header-nav-list-item-link.active {*/
+/*    color: rgb(247, 247, 247);*/
+/*}*/
 
 .header-nav-list-item:hover {
-    background: #cecdcd;
+    background:#8d84d1;
 }
 
-.header-nav-list-item.active:hover {
-    background: rgb(230, 88, 80);
-}
+/*.header-nav-list-item.active:hover {*/
+/*    background: rgb(230, 88, 80);*/
+/*}*/
 
 footer {
-    background-color: #ff6a00;
+    background-color: #8d84d1;
     width: 100%;
     display: flex;
     justify-content: space-around;

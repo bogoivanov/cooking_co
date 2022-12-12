@@ -4,7 +4,7 @@
     height: 230px;
     position: relative;
     margin-bottom: 5em;
-    background: linear-gradient(90deg, rgb(36, 121, 206) 0%, rgb(88, 191, 255) 50%, rgb(55, 35, 84) 50%, rgb(55, 35, 84) 100%);
+    background: linear-gradient(90deg, rgb(255, 97, 88) 0%, rgb(255, 97, 88) 50%, rgb(55, 35, 84) 50%, rgb(55, 35, 84) 100%);
 }
 
 
@@ -112,7 +112,7 @@
     padding-top: 30px;
     font-weight: 700;
     line-height: 60px;
-    color: #ff6200;
+    color: #3e2687;
     margin-top: 10px;
     text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.9);
     font-family: 'Poppins', sans-serif;

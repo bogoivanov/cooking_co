@@ -5,7 +5,7 @@
 
         <section id="all-ads-page">
             <article class="all-ads-title">
-                <h1>All cocktails</h1>
+                <h1>All cocktails {{ cocktails_count }}</h1>
             </article>
             {% if not cocktails %}
                 <!--If there are still no job ads in the database display:-->
@@ -40,38 +40,38 @@
 
 
             {% endif %}
-        <article class="all-ads-card">
-                    <article class="all-ads-card-image">
-                        <!-- Do not forget to change the path to the image -->
-                        <img src="{% static "img/cocktail-sample.png" %}" alt="job-icon" width="150" height="150">
-                    </article>
-
-                    <article class="all-ads-card-content">
-                        <!--You must put the headline value in <h2>-->
-                        <h2></h2>
-                        <h3></h3>
-                        <h3></h3>
-                    </article>
-
-                    <article class="all-ads-card-buttons">
-                        <a href="{% url 'cocktail create' %}"
-                           class="btn-details">Create cocktail</a>
-                    </article>
+            <article class="all-ads-card">
+                <article class="all-ads-card-image">
+                    <!-- Do not forget to change the path to the image -->
+                    <img src="{% static "img/cocktail-sample.png" %}" alt="job-icon" width="150" height="150">
                 </article>
 
+                <article class="all-ads-card-content">
+                    <!--You must put the headline value in <h2>-->
+                    <h2></h2>
+                    <h3></h3>
+                    <h3></h3>
+                </article>
 
-            <div class="pagination">
+                <article class="all-ads-card-buttons">
+                    <a href="{% url 'cocktail create' %}"
+                       class="btn-details">Create cocktail</a>
+                </article>
+            </article>
+
+
+           <div class="pagination">
     <span class="step-links">
-        {% if page_obj.has_previous %}
+        {% if cocktails.has_previous %}
             <a href="?page=1">first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            <a href="?page={{ cocktails.previous_page_number }}">previous</a>
         {% endif %}
 
-        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        Page {{ cocktails.number }} of {{ cocktails.paginator.num_pages }}.
 
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last</a>
+        {% if cocktails.has_next %}
+            <a href="?page={{ cocktails.next_page_number }}">next</a>
+            <a href="?page={{ cocktails.paginator.num_pages }}">last</a>
         {% endif %}
   </span>
             </div>

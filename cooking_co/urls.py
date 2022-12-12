@@ -19,16 +19,14 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+                  path('admin/', admin.site.urls),
 
-    path('', include('cooking_co.common.urls')),
+                  path('', include('cooking_co.common.urls')),
 
-    path('accounts/', include('cooking_co.accounts.urls')),
+                  path('accounts/', include('cooking_co.accounts.urls')),
 
-    path('recipes/', include('cooking_co.recipes.urls')),
+                  path('recipes/', include('cooking_co.recipes.urls')),
 
-    path('cocktails', include('cooking_co.cocktails.urls')),
+                  path('cocktails/', include('cooking_co.cocktails.urls')),
 
-
-
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

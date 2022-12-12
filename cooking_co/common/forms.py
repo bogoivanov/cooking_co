@@ -8,14 +8,14 @@ class CocktailCommentForm(forms.ModelForm):
         model = CocktailComment
         fields = ('text',)
         labels = {
-            'text': "Enter comment",
+            'text': "",
         }
         widgets = {
             'text': forms.Textarea(
                 attrs={
                     'cols': 20,
-                    'rows': 5,
-                    'placeholder': 'Add comment...'
+                    'rows': 3,
+                    'placeholder': 'Enter comment...'
                 },
             ),
         }
@@ -25,14 +25,14 @@ class RecipeCommentForm(forms.ModelForm):
         model = RecipeComment
         fields = ('text',)
         labels = {
-            'text': "Enter comment",
+            'text': "",
         }
         widgets = {
             'text': forms.Textarea(
                 attrs={
                     'cols': 20,
-                    'rows': 5,
-                    'placeholder': 'Add comment...'
+                    'rows': 3,
+                    'placeholder': 'Enter comment...'
                 },
             ),
         }

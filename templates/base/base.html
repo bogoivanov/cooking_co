@@ -6,8 +6,7 @@
     <meta charset="UTF-8">
     <title>Home Page</title>
     <link rel="icon" href="{% static "img/favicon.png" %}">
-    {#    <link rel="shortcut icon" href="{% static  "img/favicon.png" %}">#}
-    <!-- Do not forget to change the path to the css file -->
+
     <link rel="stylesheet" href="{% static "/css/style.css" %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -16,12 +15,6 @@
 <body>
 
 <div class="box">
-
-    <!-- In case of error, you should display div with class "error-box" -->
-    <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
-    <!--<div class="error-box">
-        <p>Error</p>
-    </div>-->
 
     <header class="header">
         <article class="header-logo">
@@ -37,12 +30,15 @@
                 {% if request.user.is_authenticated %}
                     <li class="header-nav-list-item">
                         <a href="{% url 'recipes all' %}" class="header-nav-list-item-link">All recipes</a>
-{#                        href="{% url 'recipes all' %}"#}
                     </li>
                     <li class="header-nav-list-item">
                         <a href="{% url 'recipe create' %}" class="header-nav-list-item-link">Create recipe</a>
-{#                        href="{% url 'recipes create' %}"#}
+
                     </li>
+                    <li class="header-nav-list-item">
+                        <a href="{% url 'recipes search' %}" class="header-nav-list-item-link">Search recipe</a>
+                    </li>
+
                     <li class="header-nav-list-item">
                         <a href="{% url 'cocktails all' %}" class="header-nav-list-item-link">All cocktails</a>
                     </li>
@@ -50,8 +46,9 @@
                         <a href="{% url 'cocktail create' %}" class="header-nav-list-item-link">Create cocktail</a>
                     </li>
                     <li class="header-nav-list-item">
-                        <a href="{% url 'cocktails search' %}" class="header-nav-list-item-link">Search</a>
+                        <a href="{% url 'cocktails search' %}" class="header-nav-list-item-link">Search cocktail</a>
                     </li>
+
                     <li class="header-nav-list-item">
                         <a href="{% url 'user details' pk=request.user.pk %}"
                            class="header-nav-list-item-link">Profile</a>

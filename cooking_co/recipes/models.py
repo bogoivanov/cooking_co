@@ -1,10 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.core import validators
-from django.core.validators import MinLengthValidator
 from django.db import models
 from django.utils.text import slugify
 
-from cooking_co.accounts.helpers.get_age import get_age_profile
 
 UserModel = get_user_model()
 
@@ -59,7 +57,7 @@ class Recipe(StrFromFieldsMixin, models.Model):
     )
 
     other_ingredient = models.CharField(
-        max_length=30,
+        max_length=60,
     )
 
     user = models.ForeignKey(
@@ -73,11 +71,9 @@ class Recipe(StrFromFieldsMixin, models.Model):
         return f"{self.recipe_name} with {self.id}"
 
     def save(self, *args, **kwargs):
-        # Create/Update
         super().save(*args, **kwargs)
         if not self.slug:
             self.slug = slugify(f'{self.recipe_name}-{self.id}')
-        # Update
         return super().save(*args, **kwargs)
 
     class Meta:

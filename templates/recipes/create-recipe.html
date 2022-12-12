@@ -10,21 +10,6 @@
                 <form action="{% url 'recipe create' %}" method="post" class="register-page-form">
                     <h2>Recipe</h2>
                     <p>Create your recipe</p>
-                    {#                    <label for="password">Cocktail name:</label>#}
-                    {#                    {{ form.cocktail_name }}#}
-                    {##}
-                    {#                    <label for="password">Main Ingredient:</label>#}
-                    {#                    {{ form.main_ingidient }}#}
-                    {##}
-                    {#                    <label for="repeat-password">Gender:</label>#}
-                    {#                    <br>{{ form.gender }}#}
-                    {##}
-                    {#                    <br><label for="description">Cocktail image:</label>#}
-                    {#                    {{ form.cocktail_photo }}#}
-                    {#                    {% csrf_token %}#}
-                    {#                <label for="email">Email:</label>#}
-                    {#                    {{ form.email|placeholder:'email' }}#}
-                    {#                    {{ form.email.errors }}#}
 
                     {% csrf_token %}
                     <label for="recipe_name">Recipe name:</label>
@@ -40,22 +25,6 @@
                     <label for="main_ingredient">Recipe photo:</label>
                     {{ form.recipe_photo }}
                     {{ form.recipe_photo.errors }}
-
-                    {#                    #}
-                    {#                    <p class="error"> {{ field.errors }} </p>#}
-                    {#                    <label for="email">Email:</label>#}
-                    {#                    {{ form.email }}#}
-                    {##}
-                    {#                    <label for="password">Password:</label>#}
-                    {#                    {{ form.password1 }}#}
-                    {##}
-                    {#                    <label for="repeat-password">Repeat Password:</label>#}
-                    {#                    {{ form.password2 }}#}
-                    {##}
-                    {#                    <label for="description">Enter your date of birth:</label>#}
-                    {#                    {{ form.date_of_birth }}#}
-                    {#                    #}
-                    {#                    {{ form.user == user_id }}#}
 
 
                     <article class="register-page-button">
