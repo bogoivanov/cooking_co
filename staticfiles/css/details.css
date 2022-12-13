@@ -24,7 +24,7 @@
 .details-page-card {
     position: relative;
     left: 25%;
-    width: 680px;
+    width: 750px;
     height: 358px auto;
     display: flex;
     margin-left: 1.5em;
@@ -88,7 +88,7 @@
 }
 
 .details-page-card-image>img {
-    width: 285px;
+    width: 340px;
     height: 340px;
 }
 
