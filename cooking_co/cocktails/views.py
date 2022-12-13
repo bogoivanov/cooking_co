@@ -44,7 +44,7 @@ class CocktailsViewListView(LoginRequiredMixin, ListView):
 
 
 
-class CocktailCreateView(CreateView):
+class CocktailCreateView(LoginRequiredMixin, CreateView):
     template_name = 'cocktails/create-cocktail.html'
     form_class = CocktailCreateForm
     success_url = reverse_lazy('cocktails all')
@@ -55,7 +55,7 @@ class CocktailCreateView(CreateView):
         return super().form_valid(form)
 
 
-class CocktailEditView(UpdateView):
+class CocktailEditView(LoginRequiredMixin, UpdateView):
     template_name = 'cocktails/cocktail-edit.html'
     model = Cocktail
     context_object_name = 'cocktail'

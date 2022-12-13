@@ -31,7 +31,10 @@
                     <p>Email: {{ profile.email }}</p>
 
                     {% if profile.first_name or profile.last_name %}
-                        <h2>Name: {{ profile.first_name }} {{ profile.last_name }}</h2>
+                        <h2>Name: {{ user_names }}</h2>
+                    {% endif %}
+                    {% if profile.gender %}
+                        <h2>Gender: {{ profile.gender }}</h2>
                     {% endif %}
                     <h2>Age: {{ profile.age }}</h2>
                     {% if total_likes_count >= 5 %}

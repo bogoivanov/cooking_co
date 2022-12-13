@@ -21,21 +21,12 @@ class UserCreateForm(UserCreationForm):
 
 
 class UserEditForm(UserChangeForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['first_name'].widget.attrs['placeholder'] = 'first name'
+        self.fields['last_name'].widget.attrs['placeholder'] = 'last name'
+
     class Meta:
         model = UserModel
         fields = ('first_name', 'last_name', 'gender', 'profile_image',)
 
-
-    widgets = {
-        'first_name': forms.TextInput(
-            attrs={
-                'placeholder': 'first name',
-            },
-        ),
-        'last_name': forms.TextInput(
-            attrs={
-                'placeholder': 'last name',
-            },
-        ),
-        'gender': forms.Select(),
-    }

@@ -8,15 +8,10 @@ UserModel = get_user_model()
 
 
 # Create your models here.
-class StrFromFieldsMixin:
-    str_fields = ()
-
-    def __str__(self):
-        fields = [(str_field, getattr(self, str_field, None)) for str_field in self.str_fields]
-        return ', '.join(f'{name}={value}' for (name, value) in fields)
 
 
-class Recipe(StrFromFieldsMixin, models.Model):
+
+class Recipe(models.Model):
     str_fields = ('id', 'cocktail_name')
     MIN_NAME = 2
     MAX_NAME = 30
@@ -72,8 +67,7 @@ class Recipe(StrFromFieldsMixin, models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        if not self.slug:
-            self.slug = slugify(f'{self.recipe_name}-{self.id}')
+        self.slug = slugify(f'{self.recipe_name}-{self.id}')
         return super().save(*args, **kwargs)
 
     class Meta:

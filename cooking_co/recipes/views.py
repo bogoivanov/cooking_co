@@ -21,7 +21,7 @@ class RecipesViewListView(LoginRequiredMixin, ListView):
         context['recipes_count'] = self.object_list.all().count()
         return context
 
-class RecipeCreateView(CreateView):
+class RecipeCreateView(LoginRequiredMixin, CreateView):
     template_name = 'recipes/create-recipe.html'
     model = Recipe
     form_class = RecipeCreateForm
@@ -33,7 +33,7 @@ class RecipeCreateView(CreateView):
         return super().form_valid(form)
 
 
-class RecipeEditView(UpdateView):
+class RecipeEditView(LoginRequiredMixin, UpdateView):
     template_name = 'recipes/recipe-edit.html'
     model = Recipe
     context_object_name = 'recipe'

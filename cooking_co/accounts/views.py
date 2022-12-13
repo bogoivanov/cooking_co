@@ -22,7 +22,6 @@ class SignUpView(CreateView):
     form_class = UserCreateForm
     success_url = reverse_lazy('index')
 
-
     def form_valid(self, form):
         result = super().form_valid(form)
         login(self.request, self.object)
@@ -36,14 +35,8 @@ class SignOutView(LogoutView):
 class UserEditView(LoginRequiredMixin, UpdateView):
     template_name = 'profiles/profile-edit.html'
     model = UserModel
-    fields = ('first_name', 'last_name', 'gender', 'profile_image')
+    form_class = UserEditForm
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['first_name'].widget.attrs['placeholder'] = 'first name'
-    #     self.fields['last_name'].widget.attrs['placeholder'] = 'last name'
-    #     self.fields['gender'].widget.attrs['placeholder'] = 'gender'
-    #     self.fields['profile_image'].widget.attrs['placeholder'] = 'profile_image'
     def get_success_url(self):
         return reverse_lazy('user details', kwargs={
             'pk': self.request.user.pk,
@@ -62,6 +55,14 @@ class UserDetailsView(DetailView):
 
         context['recipes_count'] = Recipe.objects.filter(user_id=self.request.user.pk).count()
         context['recipes'] = Recipe.objects.filter(user_id=self.request.user.pk)
+        user_names = ''
+        if self.request.user.first_name and self.request.user.last_name:
+            user_names = f'{self.request.user.first_name} {self.request.user.last_name}'
+        elif self.request.user.first_name:
+            user_names = f'{self.request.user.first_name}'
+        elif self.request.user.last_name:
+            user_names = f'{self.request.user.last_name}'
+        context['user_names'] = user_names
 
         context['is_owner'] = self.request.user == self.object
 
