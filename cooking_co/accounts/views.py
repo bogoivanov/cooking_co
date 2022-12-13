@@ -92,7 +92,4 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
         return HttpResponseRedirect(success_url)
 
 
-class IndexViewListView(LoginRequiredMixin, ListView):
-    model = UserModel
-    context_object_name = 'profile'
-    template_name = 'common/index.html'
+

@@ -32,7 +32,6 @@ class AppUser(AbstractUser):
         ),
         null=True,
         blank=True,
-        verbose_name="first name"
     )
 
     last_name = models.CharField(
@@ -43,8 +42,8 @@ class AppUser(AbstractUser):
         ),
         null=True,
         blank=True,
-        verbose_name="last name"
     )
+
     profile_image = models.ImageField(
         upload_to='profile-pictures/',
         null=True,
