@@ -11,8 +11,6 @@ from cooking_co.accounts.validators.validate_only_letters import validate_only_l
 
 
 class AppUser(auth_models.AbstractUser):
-
-
     MIN_LEN_FIRST_NAME = 2
     MAX_LEN_FIRST_NAME = 30
     MIN_LEN_LAST_NAME = 2
@@ -31,7 +29,9 @@ class AppUser(auth_models.AbstractUser):
         validators=(
             validators.MinLengthValidator(MIN_LEN_FIRST_NAME),
             validate_only_letters,
-        )
+        ),
+        null=True,
+        blank=True,
     )
 
     last_name = models.CharField(
@@ -39,7 +39,9 @@ class AppUser(auth_models.AbstractUser):
         validators=(
             validators.MinLengthValidator(MIN_LEN_LAST_NAME),
             validate_only_letters,
-        )
+        ),
+        null=True,
+        blank=True,
     )
     profile_image = models.ImageField(
         upload_to='profile-pictures/',
