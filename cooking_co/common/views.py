@@ -97,7 +97,7 @@ class IndexViewListView(ListView):
         context['all_recipes'] = Recipe.objects.all().count()
         context['all_articles'] = Cocktail.objects.all().count() + Recipe.objects.all().count()
         if self.request.user.is_anonymous:
-            context['age_of_user'] = 0
+            context['age_of_user'] = 16
         else:
             context['age_of_user'] = self.request.user.age
         context['all_articles_without_alcohol'] = Cocktail.objects.filter(

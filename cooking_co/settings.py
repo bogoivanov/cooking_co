@@ -22,11 +22,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-yvw8c(fu&@*&!8r$jjzt7*(v2kmj_z5ydf^h*=%osxc4^l4e5@'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# TODO SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = False
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
@@ -145,16 +145,16 @@ LOGIN_URL = reverse_lazy('sign in')
 LOGIN_REDIRECT_URL = reverse_lazy('index')
 # LOGOUT_REDIRECT_URL = reverse_lazy('index')
 
-if DEBUG:
-    EMAIL_HOST = 'in-v3.mailjet.com'
-    EMAIL_PORT = 587
-    EMAIL_USE_TLS = True
-    EMAIL_HOST_USER = 'cooking.coach10@gmail.com'
-    EMAIL_HOST_PASSWORD = 'Cooking1234.'
-# else:
-    EMAIL_BACKEND = 'django_mailjet.backends.MailjetBackend'
-    MAILJET_API_KEY = 'b9aac7e19efe27f6c3469a1bfe0377e4'
-    MAILJET_API_SECRET = '34996fda54f5f7fc3b3fcfeced53cffd'
+
+EMAIL_HOST = 'in-v3.mailjet.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'cooking.coach10@gmail.com'
+EMAIL_HOST_PASSWORD = 'Cooking1234.'
+
+EMAIL_BACKEND = 'django_mailjet.backends.MailjetBackend'
+MAILJET_API_KEY = 'b9aac7e19efe27f6c3469a1bfe0377e4'
+MAILJET_API_SECRET = '34996fda54f5f7fc3b3fcfeced53cffd'
 
 DEFAULT_FROM_EMAIL = 'cooking.coach10@gmail.com'
 

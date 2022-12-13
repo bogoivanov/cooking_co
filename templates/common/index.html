@@ -10,14 +10,14 @@
             <article class="home-page-content">
                 <h1>Best Recipes Are Here For You</h1>
                 <p>On this site, you can find {{ all_articles_without_alcohol }} recipes and cocktails!</p>
-                <a href="{% url 'recipes all' %}" class="view-all-ads">View recipes</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="{% url 'recipes all' %}" class="view-all-ads">View recipes</a>
                 <a href="{% url 'cocktails all' %}" class="view-all-ads">View cocktails</a>
             </article>
             {% else %}
             <article class="home-page-content">
                 <h1>Best Recipes Are Here For You</h1>
                 <p>On this site, you can find {{ all_articles }} recipes and cocktails!</p>
-                <a href="{% url 'recipes all' %}" class="view-all-ads">View recipes</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="{% url 'recipes all' %}" class="view-all-ads">View recipes</a>
                 <a href="{% url 'cocktails all' %}" class="view-all-ads">View cocktails</a>
             </article>
             {% endif %}
