@@ -31,5 +31,5 @@ the alcoholic cocktails. From this list, they can go to the details page of a sp
 or recipe and view detailed information, as well as like and comment with other users. 
 The site also has a search feature that allows users to search for specific cocktail recipes.
 The web application has an admin part where there are superusers and groups of users 
-with different levels of access. The "StaffCC" group has full CRUD (create, read, update, delete) 
+with different levels of access. The "AdminCC" group has full CRUD (create, read, update, delete) 
 access, while the "ModeratorsCC" group has CRUD access on cocktails and recipes, comments, and likes.
