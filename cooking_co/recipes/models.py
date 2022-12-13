@@ -57,7 +57,7 @@ class Recipe(StrFromFieldsMixin, models.Model):
     )
 
     other_ingredient = models.CharField(
-        max_length=60,
+        max_length=150,
     )
 
     user = models.ForeignKey(
