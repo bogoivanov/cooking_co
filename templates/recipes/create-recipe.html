@@ -8,8 +8,8 @@
 
             <article class="register-page-container">
                 <form action="{% url 'recipe create' %}" method="post" class="register-page-form">
-                    <h2>Recipe</h2>
-                    <p>Create your recipe</p>
+                    <h2 style="font-family: 'Poppins', sans-serif">Recipe</h2>
+                    <p style="font-family: 'Poppins', sans-serif">Create your recipe</p>
 
                     {% csrf_token %}
                     <label for="recipe_name">Recipe name:</label>

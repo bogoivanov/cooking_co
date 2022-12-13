@@ -13,9 +13,9 @@ class CocktailCommentForm(forms.ModelForm):
         widgets = {
             'text': forms.Textarea(
                 attrs={
-                    'cols': 20,
-                    'rows': 3,
-                    'placeholder': 'Enter comment...'
+                    'cols': 37,
+                    'rows': 2,
+                    'placeholder': 'Enter comment for cocktail...'
                 },
             ),
         }
@@ -30,9 +30,9 @@ class RecipeCommentForm(forms.ModelForm):
         widgets = {
             'text': forms.Textarea(
                 attrs={
-                    'cols': 20,
-                    'rows': 3,
-                    'placeholder': 'Enter comment...'
+                    'cols': 37,
+                    'rows': 2,
+                    'placeholder': 'Enter comment for recipe...'
                 },
             ),
         }

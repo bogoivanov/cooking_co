@@ -41,7 +41,7 @@
                     </article>
                     <article>
                         <div>
-                               <span class="heart" style="text-align: left;">
+                               <span class="heart" style="text-align: left; font-family: 'Poppins', sans-serif">
                                         <a href="{% url 'like recipe' recipe_id=recipe.pk %}">
                                             {% if user_liked_recipe %}
                                                 <svg style="color: red"
@@ -92,16 +92,16 @@
 
                     <article>
                         {% if comments %}
-                            <h5 class="postTime">Comments for cocktail {{ recipe.recipe_name }}</h5>
+                            <h4 class="postTime" style="font-family: 'Poppins', sans-serif">Comments for cocktail {{ recipe.recipe_name }}</h4>
                         {% else %}
-                            <h5 class="postTime">Be the first who add comments for {{ recipe.recipe_name }}</h5>
+                            <h4 class="postTime" style="font-family: 'Poppins', sans-serif">Be the first who add comments for {{ recipe.recipe_name }}</h4>
                         {% endif %}
                         {% for comment in comments %}
-                            <div style="margin-bottom: 5px;max-width: 80%;">
+                            <h5 style="font-family: 'Poppins', sans-serif; margin-bottom: 5px;max-width: 80%;">
                             {{ comment.user }}: {{ comment.text }}
                                                         <hr/>
 
-                            </div>
+                            </h5>
                         {% endfor %}
                         <form method="post" action="{% url 'comment recipe' recipe_id=recipe.pk %}">
                             <div>
@@ -111,7 +111,7 @@
                             {% csrf_token %}
                             <!-- Post Comments Button -->
                             <div>
-                                <button type="submit">Comment</button>
+                                <button style="font-family: 'Poppins', sans-serif" type="submit">Comment</button>
                             </div>
 
 

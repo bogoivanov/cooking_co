@@ -8,7 +8,7 @@
             <article class="edit-page-container">
                 <form action="{% url 'cocktail delete' slug=cocktail.slug  %}" method="post" class="edit-page-form">
 
-                    <h2>You want to delete your cocktail?</h2>
+                    <h2 style="font-family: 'Poppins', sans-serif">You want to delete your cocktail?</h2>
                     {{ form }}
                     {% csrf_token %}
                     <article class="delete-page-button">

@@ -8,8 +8,8 @@
             <article class="login-page-container">
 
                 <form action="{% url 'sign in' %}" method="post" class="login-page-form">
-                    <h2>Login</h2>
-                    <p>Welcome, login please!</p>
+                    <h2 style="font-family: 'Poppins', sans-serif" >Login</h2>
+                    <p style="font-family: 'Poppins', sans-serif" >Welcome, login please!</p>
 
                     {{ form }}
 
@@ -21,7 +21,7 @@
                     </article>
 
                     <article class="no-account">
-                        <p>Don't have an account? <a href="{% url 'sign up' %}">Sign up</a></p>
+                        <p >Don't have an account? <a href="{% url 'sign up' %}">Sign up</a></p>
                     </article>
                 </form>
 

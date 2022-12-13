@@ -9,8 +9,8 @@
 
             <article class="register-page-container">
                 <form action="{% url 'sign up' %}" method="post" class="register-page-form">
-                    <h2>Register</h2>
-                    <p>Join us and find the perfect job.</p>
+                    <h2 style="font-family: 'Poppins', sans-serif">Register</h2>
+                    <p style="font-family: 'Poppins', sans-serif">Join us and add recipes.</p>
                     <label for="email">Email:</label>
                     {{ form.email|placeholder:'email ' }}
                     {{ form.email.errors }}

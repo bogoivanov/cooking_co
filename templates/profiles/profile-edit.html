@@ -8,7 +8,7 @@
             <article class="edit-page-container">
                 <form action="{% url 'user edit' pk=user.pk %}" method="post" class="edit-page-form" enctype="multipart/form-data">
 
-                    <h2>Edit your profile</h2>
+                    <h2 style="font-family: 'Poppins', sans-serif">Edit your profile</h2>
                     <p class="error"> {{ field.errors }} </p>
                     <label for="first_name">First name:</label>
                     {{ form.first_name }}

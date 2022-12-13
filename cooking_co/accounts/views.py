@@ -71,7 +71,6 @@ class UserDetailsView(DetailView):
         recipes_likes_count = sum(x.recipelike_set.count() for x in recipes_of_user)
 
         context['total_likes_count'] = cocktail_likes_count + recipes_likes_count
-        print(context['cocktails'])
         return context
 
 

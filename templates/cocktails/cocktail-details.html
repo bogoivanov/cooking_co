@@ -5,7 +5,7 @@
 
         <section id="details-page">
             <article class="details-gage-title">
-                <h1>Cocktail Detail Page</h1>
+                <h1 >Cocktail Detail Page</h1>
             </article>
             <article class="details-page-card">
 
@@ -35,7 +35,7 @@
                     </article>
                     <article>
                         <div>
-                               <span class="heart" style="text-align: left;">
+                               <span class="heart" style="text-align: left; font-family: 'Poppins', sans-serif">
                                         <a href="{% url 'like cocktail' cocktail_id=cocktail.pk %}">
                                             {% if user_liked_cocktail %}
                                                 <svg style="color: red"
@@ -86,26 +86,26 @@
 
                     <article>
                         {% if comments %}
-                            <h5 class="postTime">Comments for cocktail {{ cocktail.cocktail_name }}</h5>
+                            <h4 class="postTime" style="font-family: 'Poppins', sans-serif">Comments for cocktail {{ cocktail.cocktail_name }}</h4>
                         {% else %}
-                            <h5 class="postTime">Be the first who add comments for {{ cocktail.cocktail_name }}</h5>
+                            <h4 class="postTime" style="font-family: 'Poppins', sans-serif">Be the first who add comments for {{ cocktail.cocktail_name }}</h4>
                         {% endif %}
                         {% for comment in comments %}
-                            <div style="margin-bottom: 5px;max-width: 80%;">
+                            <h5 style="font-family: 'Poppins', sans-serif; margin-bottom: 5px;max-width: 80%;" >
                             {{ comment.user }}: {{ comment.text }}
                                                         <hr/>
 
-                            </div>
+                            </h5>
                         {% endfor %}
                         <form method="post" action="{% url 'comment cocktail' cocktail_id=cocktail.pk %}">
-                            <div>
+                            <div >
                                 {{ form }}
                             </div>
 
                             {% csrf_token %}
                             <!-- Post Comments Button -->
                             <div>
-                                <button type="submit">Comment</button>
+                                <button style="font-family: 'Poppins', sans-serif" type="submit">Comment</button>
                             </div>
 
 

@@ -8,8 +8,8 @@
 
             <article class="register-page-container">
                 <form action="{% url 'cocktail edit' slug=cocktail.slug %}" method="post" class="register-page-form">
-                    <h2>Cocktail</h2>
-                    <p>Edit your cocktail</p>
+                    <h2 style="font-family: 'Poppins', sans-serif">Cocktail</h2>
+                    <p style="font-family: 'Poppins', sans-serif">Edit your cocktail</p>
 
                     <label for="cocktail_name">Cocktail name:</label>
                     {{ form.cocktail_name }}
