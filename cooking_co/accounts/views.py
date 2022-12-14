@@ -1,10 +1,15 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import Group
 from django.contrib.auth.views import LoginView, LogoutView
+from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, get_user_model
+from django.template.loader import render_to_string
 from django.urls import reverse_lazy
+from django.utils.html import strip_tags
 from django.views.generic import CreateView, UpdateView, DetailView, DeleteView, ListView
 
+from cooking_co import settings
 from cooking_co.accounts.forms import UserCreateForm, UserEditForm
 from cooking_co.cocktails.models import Cocktail
 from cooking_co.common.models import CocktailComment, CocktailLike, RecipeComment, RecipeLike
@@ -70,8 +75,30 @@ class UserDetailsView(DetailView):
         cocktail_likes_count = sum(x.cocktaillike_set.count() for x in cocktails_of_user)
         recipes_of_user = Recipe.objects.filter(user_id=self.request.user.pk)
         recipes_likes_count = sum(x.recipelike_set.count() for x in recipes_of_user)
+        total_likes_count = cocktail_likes_count + recipes_likes_count
+        context['total_likes_count'] = total_likes_count
+        if self.object.ready_for_moderator_email == False:
+            if total_likes_count >= 5:
+                if self.request.user == self.object:
+                    self.object.ready_for_moderator = True
+                    if self.object.ready_for_moderator_email == False:
+                        # TODO
+                        email_content = render_to_string('email_templates/moderator-greeting.html', {
+                            'user': self.object})
 
-        context['total_likes_count'] = cocktail_likes_count + recipes_likes_count
+                        user_email = self.object.email
+                        send_mail(
+                            subject='You are part from Cooking Coach moderators',
+                            message=strip_tags(email_content),
+                            html_message=email_content,
+                            from_email=settings.EMAIL_HOST_USER,
+                            recipient_list=(user_email,),
+                        )
+                        self.object.ready_for_moderator_email = True
+                        self.object.is_staff = True
+                    group = Group.objects.get(name='ModeratorsCC')
+                    self.object.groups.add(group)
+                    self.object.save()
         return context
 
 
@@ -90,6 +117,3 @@ class UserDeleteView(LoginRequiredMixin, DeleteView):
         success_url = self.get_success_url()
         self.object.delete()
         return HttpResponseRedirect(success_url)
-
-
-

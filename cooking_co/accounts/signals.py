@@ -4,7 +4,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-
 from cooking_co import settings
 
 UserModel = get_user_model()
@@ -15,7 +14,7 @@ def send_email_on_successful_sign_up(instance, created, **kwargs):
     if not created:
         return
 
-    email_content = render_to_string('common/email-greeting.html', {
+    email_content = render_to_string('email_templates/email-greeting.html', {
         'user': instance})
 
     user_email = instance.email

@@ -16,10 +16,14 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.template.defaulttags import url
 from django.urls import path, include
+from django.urls import re_path as url
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
+
+                  # url(r'/admin/oauth/', include('oauthadmin.urls')),
 
                   path('', include('cooking_co.common.urls')),
 

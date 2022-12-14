@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 'oauthadmin',
+
     'cooking_co.common',
     'cooking_co.accounts',
     'cooking_co.cocktails',
@@ -51,7 +53,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # 'oauthadmin.middleware.OauthAdminSessionMiddleware',
 ]
+# SESSION_SERIALIZER = "django.contrib.sessions.serializers.PickleSerializer"
 
 ROOT_URLCONF = 'cooking_co.urls'
 
@@ -157,4 +162,3 @@ MAILJET_API_KEY = 'b9aac7e19efe27f6c3469a1bfe0377e4'
 MAILJET_API_SECRET = '34996fda54f5f7fc3b3fcfeced53cffd'
 
 DEFAULT_FROM_EMAIL = 'cooking.coach10@gmail.com'
-

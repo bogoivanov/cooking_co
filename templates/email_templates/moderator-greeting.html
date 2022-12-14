@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cooking Coach</title>
+</head>
+<body style="display: flex;
+			justify-content: center;">
+<div style="display: flex;
+			justify-content: center;
+			border: 3px solid rgb(65, 63, 63);
+			border-radius: 20px;
+			margin: 2%;
+			max-width: 620px;">
+    <div>
+
+
+        <h1 style="			text-align: center;
+                color: rgb(65, 63, 63);
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+
+            <!-- Receiver username -->
+            {% if profile.first_name or profile.last_name %}
+                Congratulations {{ user_names }}!
+            {% else %}
+                Congratulations {{ profile.email }}!
+            {% endif %}
+        </h1>
+
+        <div style="
+                justify-content: center;">
+            <img style="width: 382px;
+
+			 height: 290px;" id="logo cc"
+                 src="https://res.cloudinary.com/ddxz8dlr2/image/upload/v1670872733/cooking.coach10/logo-cc_pkzc6h.png"
+                 alt="logo cc">
+        </div>
+
+        <p style="
+            text-align: center;
+            padding: 20px 20px 0 20px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+            Now you are part of our team and you are in group ModeratorsCC!<br>
+            You can log in with your email and password on www.****.com/admin/oauth <br>
+            From now on you have CRUD permissions to recipes and cocktails!
+
+        </p>
+    </div>
+</div>
+</body>
+</html>

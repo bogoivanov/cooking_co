@@ -66,6 +66,16 @@ class AppUser(AbstractUser):
         null=True,
         blank=True,
     )
+    ready_for_moderator = models.BooleanField(
+        default=False,
+        null=True,
+        blank=True,
+    )
+    ready_for_moderator_email = models.BooleanField(
+        default=False,
+        null=True,
+        blank=True,
+    )
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
