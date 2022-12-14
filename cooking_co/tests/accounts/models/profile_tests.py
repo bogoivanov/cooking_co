@@ -88,3 +88,16 @@ class ProfileModelTests(TestCase):
 
         self.assertIsNotNone(context.exception)
 
+    def test_profile_save__when_last_name_one_letter__expect_exception(self):
+        profile = UserModel(
+            email='bogoivanov@abv.bg',
+            password='Cooking1234.',
+            date_of_birth='2000-11-11',
+            first_name='Bogo',
+            last_name='B',
+        )
+        with self.assertRaises(ValidationError) as context:
+            profile.full_clean()
+            profile.save()
+
+        self.assertIsNotNone(context.exception)
