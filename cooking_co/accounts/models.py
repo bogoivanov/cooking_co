@@ -1,3 +1,4 @@
+from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import AbstractUser
 from cooking_co.accounts.helpers.get_age import get_age_profile
 from cooking_co.accounts.managers import UserManager
@@ -44,11 +45,8 @@ class AppUser(AbstractUser):
         blank=True,
     )
 
-    profile_image = models.ImageField(
-        upload_to='profile-pictures/',
-        null=True,
-        blank=True,
-        validators=(validate_file_less_than_5mb,),
+    profile_image = CloudinaryField(
+        # validators=(validate_file_less_than_5mb,),
     )
 
     gender = models.CharField(
