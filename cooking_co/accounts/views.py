@@ -76,7 +76,9 @@ class UserDetailsView(DetailView):
         recipes_of_user = Recipe.objects.filter(user_id=self.request.user.pk)
         recipes_likes_count = sum(x.recipelike_set.count() for x in recipes_of_user)
         total_likes_count = cocktail_likes_count + recipes_likes_count
+        needed_likes = max((5 - total_likes_count), 0)
         context['total_likes_count'] = total_likes_count
+        context['needed_likes']= needed_likes
         if self.object.ready_for_moderator_email == False:
             if total_likes_count >= 5:
                 if self.request.user == self.object:
