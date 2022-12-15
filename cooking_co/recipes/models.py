@@ -64,7 +64,7 @@ class Recipe(models.Model):
     )
 
     def __str__(self):
-        return f"{self.recipe_name} with {self.id}"
+        return f"{self.recipe_name} with id: {self.id}"
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

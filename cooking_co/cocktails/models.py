@@ -64,7 +64,7 @@ class Cocktail(models.Model):
     )
 
     def __str__(self):
-        return f"{self.cocktail_name} with {self.id}"
+        return f"{self.cocktail_name} with id: {self.id}"
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

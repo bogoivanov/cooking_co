@@ -20,6 +20,7 @@ import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+import cloudinary
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -29,8 +30,7 @@ SECRET_KEY = 'django-insecure-yvw8c(fu&@*&!8r$jjzt7*(v2kmj_z5ydf^h*=%osxc4^l4e5@
 
 # TODO SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = False
-DEBUG = True
-import cloudinary
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 # Application definition
@@ -152,7 +152,6 @@ cloudinary.config(
     secure=True,
 )
 
-# CLOUDINARY_URL='cloudinary://759557234311235:OGccqGcL4TnfqVtI43XnMyG3_K0@ddxz8dlr2'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
