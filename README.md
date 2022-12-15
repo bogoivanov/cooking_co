@@ -21,6 +21,7 @@ gender, and uploading a profile picture. When editing is complete, the user is r
 to their details page where they can see their changed profile picture and names. 
 Users can also delete their profile, but the recipes and cocktails they have uploaded 
 to the site will remain in the database with the user field set to null.
+Once 5 likes are reached, the user is added to the "ModeratorsCC" group and receives an email.
 Recipes and cocktails can be created through the navigation bar or on the user profile page. 
 Each cocktail or recipe is associated with the logged-in user. Users under 21 years old
 must use the main ingredient "non-alcoholic" when creating a cocktail. The user can edit 
