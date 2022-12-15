@@ -22,11 +22,8 @@
                 font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
 
             <!-- Receiver username -->
-            {% if profile.first_name or profile.last_name %}
-                Congratulations {{ user_names }}!
-            {% else %}
+
                 Congratulations {{ profile.email }}!
-            {% endif %}
         </h1>
 
         <div style="
@@ -43,7 +40,7 @@
             padding: 20px 20px 0 20px;
             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
             Now you are part of our team and you are in group ModeratorsCC!<br>
-            You can log in with your email and password on www.****.com/admin/oauth <br>
+            You can log in with your email and password on www.****.com/admin <br>
             From now on you have CRUD permissions to recipes and cocktails!
 
         </p>
