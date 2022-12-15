@@ -1,3 +1,5 @@
+from cloudinary.forms import CloudinaryFileField
+
 from cooking_co.cocktails.models import Cocktail
 
 from django import forms
@@ -24,11 +26,7 @@ class CocktailBaseForm(forms.ModelForm):
                     'placeholder': 'other ingredients',
                 }
             ),
-            'cocktail_photo': forms.URLInput(
-                attrs={
-                    'placeholder': 'cocktail image',
-                }
-            )
+            # 'cocktail_photo': CloudinaryFileField()
         }
 
 

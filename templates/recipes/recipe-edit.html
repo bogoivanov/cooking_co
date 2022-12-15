@@ -7,7 +7,7 @@
 
 
             <article class="register-page-container">
-                <form action="{% url 'recipe edit' slug=recipe.slug %}" method="post" class="register-page-form">
+                <form action="{% url 'recipe edit' slug=recipe.slug %}" method="post" class="register-page-form" enctype="multipart/form-data">
                     <h2 style="font-family: 'Poppins', sans-serif">Recipe</h2>
                     <p style="font-family: 'Poppins', sans-serif">Edit your recipe</p>
 

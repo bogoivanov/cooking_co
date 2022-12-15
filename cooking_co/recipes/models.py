@@ -1,3 +1,4 @@
+from cloudinary.models import CloudinaryField
 from django.contrib.auth import get_user_model
 from django.core import validators
 from django.db import models
@@ -33,7 +34,7 @@ class Recipe(models.Model):
         validators=(validators.MinLengthValidator(MIN_NAME),)
     )
 
-    recipe_photo = models.URLField(
+    recipe_photo = CloudinaryField(
         null=False,
         blank=True,
     )

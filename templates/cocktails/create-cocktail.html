@@ -7,7 +7,7 @@
 
 
             <article class="register-page-container">
-                <form action="{% url 'cocktail create' %}" method="post" class="register-page-form">
+                <form action="{% url 'cocktail create' %}" method="post" class="register-page-form" enctype="multipart/form-data">
                     <h2 style="font-family: 'Poppins', sans-serif">Cocktail</h2>
                     <p style="font-family: 'Poppins', sans-serif">Create your cocktail</p>
 
@@ -25,14 +25,13 @@
                         {{ form.other_ingredient.errors }}
 
                     {% else %}
-                        <label for="main_ingredient">Ingredients:</label>
+                        <label for="other_ingredient">Ingredients:</label>
                         {{ form.other_ingredient }}
                         {{ form.other_ingredient.errors }}
                     {% endif %}
-                    <label for="main_ingredient">Cocktail photo:</label>
+                    <label for="cocktail_photo">Cocktail photo:</label>
                     {{ form.cocktail_photo }}
                     {{ form.cocktail_photo.errors }}
-
                     <article class="register-page-button">
                         <button class="btn-register">Create cocktail</button>
                     </article>

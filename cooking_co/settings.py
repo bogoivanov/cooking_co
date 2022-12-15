@@ -10,8 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 from pathlib import Path
+
+import cloudinary as cloudinary
 from django.urls import reverse_lazy
 import psycopg2
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,6 +30,7 @@ SECRET_KEY = 'django-insecure-yvw8c(fu&@*&!8r$jjzt7*(v2kmj_z5ydf^h*=%osxc4^l4e5@
 # TODO SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = False
 DEBUG = True
+import cloudinary
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 # Application definition
@@ -37,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'cloudinary',
     # 'oauthadmin',
 
     'cooking_co.common',
@@ -134,10 +141,18 @@ STATICFILES_DIRS = (
     BASE_DIR / 'staticfiles',
 )
 
-MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
 
-MEDIA_ROOT = BASE_DIR / 'mediafiles'
+# MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
+cloudinary.config(
+    cloud_name="ddxz8dlr2",
+    api_key="759557234311235",
+    api_secret="OGccqGcL4TnfqVtI43XnMyG3_K0",
+    secure=True,
+)
+
+# CLOUDINARY_URL='cloudinary://759557234311235:OGccqGcL4TnfqVtI43XnMyG3_K0@ddxz8dlr2'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 

@@ -24,11 +24,6 @@ class RecipeBaseForm(forms.ModelForm):
                     'placeholder': 'other ingredients',
                 }
             ),
-            'recipe_photo': forms.URLInput(
-                attrs={
-                    'placeholder': 'recipe image',
-                }
-            )
         }
 
 

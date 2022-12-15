@@ -1,9 +1,11 @@
+import cloudinary
+from cloudinary.models import CloudinaryField
 from django.contrib.auth import get_user_model
 from django.core import validators
 from django.core.validators import MinLengthValidator
 from django.db import models
 from django.utils.text import slugify
-
+from cloudinary import models as cloudinary_models
 
 UserModel = get_user_model()
 
@@ -31,7 +33,7 @@ class Cocktail(models.Model):
         validators=(validators.MinLengthValidator(MIN_NAME),)
     )
 
-    cocktail_photo = models.URLField(
+    cocktail_photo = CloudinaryField(
         null=False,
         blank=True,
     )
