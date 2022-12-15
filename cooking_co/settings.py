@@ -141,9 +141,9 @@ STATICFILES_DIRS = (
     BASE_DIR / 'staticfiles',
 )
 
-# MEDIA_URL = '/media/'
+MEDIA_URL = '/media/'
 
-# MEDIA_ROOT = BASE_DIR / 'mediafiles'
+MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
 cloudinary.config(
     cloud_name="ddxz8dlr2",
