@@ -79,7 +79,7 @@ class TestViewListView(LoginRequiredMixin, ListView):
 
 
 class Test404View(TemplateView):
-    template_name = '404/../../templates/404.html'
+    template_name = '404.html'
 
 
 class IndexViewListView(ListView):

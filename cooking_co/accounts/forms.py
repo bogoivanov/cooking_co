@@ -1,8 +1,21 @@
 from django.contrib.auth import forms as auth_forms, get_user_model
 from django import forms
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm, AuthenticationForm
 
 UserModel = get_user_model()
+
+
+class UserSignInForm(AuthenticationForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['placeholder'] = 'email'
+        self.fields['password'].widget.attrs['placeholder'] = 'password'
+
+    class Meta:
+        model = UserModel
+        username = None
+        fields = ('username', 'password',)
 
 
 class UserCreateForm(UserCreationForm):
@@ -29,4 +42,3 @@ class UserEditForm(UserChangeForm):
     class Meta:
         model = UserModel
         fields = ('first_name', 'last_name', 'gender', 'profile_image',)
-

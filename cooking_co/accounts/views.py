@@ -10,7 +10,7 @@ from django.utils.html import strip_tags
 from django.views.generic import CreateView, UpdateView, DetailView, DeleteView, ListView
 
 from cooking_co import settings
-from cooking_co.accounts.forms import UserCreateForm, UserEditForm
+from cooking_co.accounts.forms import UserCreateForm, UserEditForm, UserSignInForm
 from cooking_co.cocktails.models import Cocktail
 from cooking_co.common.models import CocktailComment, CocktailLike, RecipeComment, RecipeLike
 from cooking_co.recipes.models import Recipe
@@ -20,6 +20,11 @@ UserModel = get_user_model()
 
 class SignInView(LoginView):
     template_name = 'accounts/sign_in.html'
+    form_class = UserSignInForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
 
 class SignUpView(CreateView):
@@ -78,16 +83,14 @@ class UserDetailsView(DetailView):
         total_likes_count = cocktail_likes_count + recipes_likes_count
         needed_likes = max((5 - total_likes_count), 0)
         context['total_likes_count'] = total_likes_count
-        context['needed_likes']= needed_likes
-        if self.object.ready_for_moderator_email == False:
+        context['needed_likes'] = needed_likes
+        if not self.object.ready_for_moderator_email:
             if total_likes_count >= 5:
                 if self.request.user == self.object:
                     self.object.ready_for_moderator = True
-                    if self.object.ready_for_moderator_email == False:
-                        # TODO
+                    if not self.object.ready_for_moderator_email:
                         email_content = render_to_string('email_templates/moderator-greeting.html', {
                             'user': self.object})
-
                         user_email = self.object.email
                         send_mail(
                             subject='You are part from Cooking Coach moderators',

@@ -16,10 +16,12 @@ class RecipesViewListView(LoginRequiredMixin, ListView):
     context_object_name = 'recipes'
     model = Recipe
     template_name = 'recipes/recipes-all.html'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['recipes_count'] = self.object_list.all().count()
         return context
+
 
 class RecipeCreateView(LoginRequiredMixin, CreateView):
     template_name = 'recipes/create-recipe.html'
