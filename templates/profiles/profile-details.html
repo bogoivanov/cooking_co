@@ -11,7 +11,7 @@
                 {% if not profile.profile_image %}
                     <article class="details-page-card-image">
                         <!-- Do not forget to change the path to the image -->
-                        <img src="{% static "img/no-profile-image.png" %}" alt="details-image">
+                        <img src="{% static "img/no-profile-img.png" %}" alt="no-profile-image">
                     </article>
                 {% else %}
 
@@ -20,7 +20,7 @@
                         <img
                                 class="img-circle elevation-2"
                                 src="{{ profile.profile_image.url }}"
-                                alt="User Image"/>
+                                alt="user-image"/>
                     </article>
 
 
