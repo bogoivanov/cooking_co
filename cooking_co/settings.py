@@ -29,8 +29,8 @@ import cloudinary
 SECRET_KEY = 'django-insecure-yvw8c(fu&@*&!8r$jjzt7*(v2kmj_z5ydf^h*=%osxc4^l4e5@'
 
 # TODO SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-# DEBUG = True
+# DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 # Application definition
