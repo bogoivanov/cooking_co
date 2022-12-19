@@ -4,6 +4,8 @@ from cooking_co.accounts.forms import UserCreateForm, UserEditForm
 
 UserModel = get_user_model()
 
+admin.site.site_header = "Cooking Coach Admin"
+
 
 @admin.register(UserModel)
 class AppUserAdmin(auth_admin.UserAdmin):
@@ -12,7 +14,7 @@ class AppUserAdmin(auth_admin.UserAdmin):
     list_display = ['email', 'first_name', 'last_name', 'date_of_birth', 'age']
     add_fieldsets = (
         (None, {'fields': (
-            'email', 'password1', 'password2', 'date_of_birth', 'is_staff', )}),
+            'email', 'password1', 'password2', 'date_of_birth', 'is_staff',)}),
     )
     fieldsets = (
         (None, {

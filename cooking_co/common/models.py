@@ -33,6 +33,9 @@ class CocktailComment(models.Model):
         on_delete=models.RESTRICT,
     )
 
+    def __str__(self):
+        return f"{self.text} for: {self.cocktail} from: {self.user}"
+
     class Meta:
         ordering = ['-publication_date_and_time', ]
 
@@ -49,7 +52,8 @@ class CocktailLike(models.Model):
         UserModel,
         on_delete=models.RESTRICT,
     )
-
+    def __str__(self):
+        return f"like for: {self.cocktail} from: {self.user}"
 
 class RecipeComment(models.Model):
     MAX_TEXT_LENGTH = 300
@@ -76,7 +80,8 @@ class RecipeComment(models.Model):
         UserModel,
         on_delete=models.RESTRICT,
     )
-
+    def __str__(self):
+        return f"{self.text} for: {self.recipe} from: {self.user}"
     class Meta:
         ordering = ['-publication_date_and_time', ]
 
@@ -93,3 +98,6 @@ class RecipeLike(models.Model):
         UserModel,
         on_delete=models.RESTRICT,
     )
+
+    def __str__(self):
+        return f"like for: {self.recipe} from: {self.user}"

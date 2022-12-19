@@ -9,6 +9,19 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+# TODO
+"""
+1. Add dirty word validation in Comments models.
+2. Add user email and Cocktail/Recipe name in Comments and Likes models.
+3. Create moderators app for editing Cocktail/Recipe, comments and likes for "ModeratorsCC" 
+   with permissions of this group. To be reached at ./moderators/.
+4. On 10 likes user to become part from "AdminCC" and is_staff=True.
+5. Add text field in Cocktail/Recipe "method" to describe how to prepare. 
+   To be visible only on Cocktail/Recipe Details page
+6. Add fields in Recipe "time_to_cook" and "salt",
+7. Add page "About us" where to use text for description of project
+"""
+
 from pathlib import Path
 
 import cloudinary as cloudinary
@@ -176,6 +189,7 @@ MAILJET_API_KEY = 'b9aac7e19efe27f6c3469a1bfe0377e4'
 MAILJET_API_SECRET = '34996fda54f5f7fc3b3fcfeced53cffd'
 
 DEFAULT_FROM_EMAIL = 'cooking.coach10@gmail.com'
+
 '''
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------

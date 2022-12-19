@@ -45,13 +45,6 @@ class AppUser(AbstractUser):
         blank=True,
     )
 
-    # profile_image = models.ImageField(
-    #     upload_to='profile-pictures/',
-    #     null=True,
-    #     blank=True,
-    #     validators=(validate_file_less_than_5mb,),
-    # )
-
     profile_image = CloudinaryField(
     )
 
