@@ -161,10 +161,16 @@ span {
     font-size: 14px;
     color: #202F7C;
 }
-
+.no-account>p,
+.account>p {
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+}
 .no-account>p>a,
 .account>p>a {
     color: #6787FF;
+    font-family: 'Poppins', sans-serif;
     font-weight: bold;
     text-decoration: none;
 }

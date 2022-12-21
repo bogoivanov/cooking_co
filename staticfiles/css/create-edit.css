@@ -101,3 +101,9 @@
     font-size: 0.8rem;
     color: #656880;
 }
+.errorlist {
+    color: #a80c08;
+    font-size: 10px;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600;
+}
