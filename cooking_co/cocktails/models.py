@@ -55,7 +55,11 @@ class Cocktail(models.Model):
     other_ingredient = models.CharField(
         max_length=150,
     )
-
+    prepare = models.TextField(
+        max_length=400,
+        null=False,
+        blank=False,
+    )
     user = models.ForeignKey(
         UserModel,
         on_delete=models.SET_NULL,

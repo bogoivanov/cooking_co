@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 
 from cooking_co.cocktails.models import Cocktail
+from cooking_co.common.core.dirty_words_validator import validate_dirty_words
 from cooking_co.recipes.models import Recipe
 
 UserModel = get_user_model()
@@ -23,15 +24,18 @@ class CocktailComment(models.Model):
 
     cocktail = models.ForeignKey(
         Cocktail,
-        on_delete=models.RESTRICT,
+        on_delete=models.CASCADE,
         null=False,
         blank=True,
     )
 
     user = models.ForeignKey(
         UserModel,
-        on_delete=models.RESTRICT,
+        on_delete=models.CASCADE,
     )
+
+
+
 
     def __str__(self):
         return f"{self.text} for: {self.cocktail} from: {self.user}"
@@ -43,14 +47,14 @@ class CocktailComment(models.Model):
 class CocktailLike(models.Model):
     cocktail = models.ForeignKey(
         Cocktail,
-        on_delete=models.RESTRICT,
+        on_delete=models.CASCADE,
         null=False,
         blank=True,
     )
 
     user = models.ForeignKey(
         UserModel,
-        on_delete=models.RESTRICT,
+        on_delete=models.CASCADE,
     )
     def __str__(self):
         return f"like for: {self.cocktail} from: {self.user}"
@@ -59,6 +63,7 @@ class RecipeComment(models.Model):
     MAX_TEXT_LENGTH = 300
     text = models.CharField(
         max_length=MAX_TEXT_LENGTH,
+        validators=[validate_dirty_words],
         null=False,
         blank=False,
     )
@@ -71,14 +76,14 @@ class RecipeComment(models.Model):
 
     recipe = models.ForeignKey(
         Recipe,
-        on_delete=models.RESTRICT,
+        on_delete=models.CASCADE,
         null=False,
         blank=True,
     )
 
     user = models.ForeignKey(
         UserModel,
-        on_delete=models.RESTRICT,
+        on_delete=models.CASCADE,
     )
     def __str__(self):
         return f"{self.text} for: {self.recipe} from: {self.user}"
@@ -89,14 +94,14 @@ class RecipeComment(models.Model):
 class RecipeLike(models.Model):
     recipe = models.ForeignKey(
         Recipe,
-        on_delete=models.RESTRICT,
+        on_delete=models.CASCADE,
         null=False,
         blank=True,
     )
 
     user = models.ForeignKey(
         UserModel,
-        on_delete=models.RESTRICT,
+        on_delete=models.CASCADE,
     )
 
     def __str__(self):

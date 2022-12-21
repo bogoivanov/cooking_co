@@ -4,16 +4,13 @@ from django.core import validators
 from django.db import models
 from django.utils.text import slugify
 
-
 UserModel = get_user_model()
 
 
 # Create your models here.
 
 
-
 class Recipe(models.Model):
-    str_fields = ('id', 'cocktail_name')
     MIN_NAME = 2
     MAX_NAME = 30
 
@@ -27,6 +24,10 @@ class Recipe(models.Model):
     VEGAN = 'vegan'
     INGREDIENTS = [(x, x) for x in (PORK, CHICKEN, BEEF, FISH, SEAFOOD, EGGS, VEGETARIAN, VEGAN)]
 
+    ON_TASTE = 'on taste'
+    ON_EYE = 'on eye'
+    SALT = [(x, x) for x in (ON_TASTE, ON_EYE)]
+
     recipe_name = models.CharField(
         max_length=MAX_NAME,
         null=False,
@@ -36,10 +37,11 @@ class Recipe(models.Model):
 
     recipe_photo = CloudinaryField(
         null=False,
-        blank=True,
+        blank=False,
     )
 
     slug = models.SlugField(
+        max_length=255,
         unique=True,
         null=False,
         blank=True,
@@ -49,13 +51,24 @@ class Recipe(models.Model):
         choices=INGREDIENTS,
         max_length=30,
         null=False,
-        blank=True,
+        blank=False,
     )
 
     other_ingredient = models.CharField(
         max_length=150,
     )
 
+    prepare = models.TextField(
+        max_length=400,
+        null=False,
+        blank=False,
+    )
+    salt = models.CharField(
+        choices=SALT,
+        max_length=10,
+        null=False,
+        blank=True,
+    )
     user = models.ForeignKey(
         UserModel,
         on_delete=models.SET_NULL,

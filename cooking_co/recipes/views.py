@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 from django.views.generic import CreateView, UpdateView, DetailView, DeleteView, ListView
 from cooking_co.common.forms import RecipeCommentForm
 from cooking_co.common.models import RecipeComment, RecipeLike
-from cooking_co.recipes.forms import RecipeCreateForm
+from cooking_co.recipes.forms import RecipeCreateForm, RecipeEditForm
 from cooking_co.recipes.models import Recipe
 
 UserModel = get_user_model()
@@ -38,8 +38,8 @@ class RecipeCreateView(LoginRequiredMixin, CreateView):
 class RecipeEditView(LoginRequiredMixin, UpdateView):
     template_name = 'recipes/recipe-edit.html'
     model = Recipe
+    form_class = RecipeEditForm
     context_object_name = 'recipe'
-    fields = ('recipe_name', 'main_ingredient', 'other_ingredient', 'recipe_photo')
 
     def get_success_url(self):
         return reverse_lazy('recipe details', kwargs={

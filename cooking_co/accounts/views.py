@@ -57,7 +57,7 @@ class UserDetailsView(DetailView):
     template_name = 'profiles/profile-details.html'
     model = UserModel
     context_object_name = 'profile'
-
+    user = UserModel
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cocktails_count'] = Cocktail.objects.filter(user_id=self.request.user.pk).count()

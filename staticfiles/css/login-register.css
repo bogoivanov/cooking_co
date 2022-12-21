@@ -22,7 +22,7 @@
 .register-page-container {
     background-color: #fff;
     width: 620px;
-    height: 529px;
+    height: 640px;
     position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -114,7 +114,7 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    width: 100px;
+    width: 150px;
     padding: 7px;
     background: rgb(252, 83, 74);
     font-weight: 500;

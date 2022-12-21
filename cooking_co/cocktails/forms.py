@@ -8,17 +8,18 @@ from django import forms
 class CocktailBaseForm(forms.ModelForm):
     class Meta:
         model = Cocktail
-        fields = ('cocktail_name', 'main_ingredient', 'other_ingredient', 'cocktail_photo')
+        fields = ('cocktail_name', 'main_ingredient', 'other_ingredient','prepare', 'cocktail_photo')
         labels = {
-            'cocktail_name': 'Cocktail name',
+            'recipe_name': 'Recipe name',
             'main_ingredient': 'Main ingredient',
             'other_ingredient': 'Other ingredients',
-            'cocktail_photo': 'Cocktail photo',
+            'recipe_photo': 'Recipe photo',
         }
+
         widgets = {
             'cocktail_name': forms.TextInput(
                 attrs={
-                    'placeholder': 'cocktail name'
+                    'placeholder': 'recipe name'
                 }
             ),
             'other_ingredient': forms.TextInput(
@@ -26,7 +27,13 @@ class CocktailBaseForm(forms.ModelForm):
                     'placeholder': 'other ingredients',
                 }
             ),
-            # 'cocktail_photo': CloudinaryFileField()
+            'prepare': forms.Textarea(
+                attrs={
+                    'cols': 31,
+                    'rows': 4,
+                    'placeholder': 'How to prepare...'
+                },
+            ),
         }
 
 

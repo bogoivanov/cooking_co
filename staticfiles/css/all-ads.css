@@ -101,8 +101,8 @@
 }
 
 .all-ads-card-buttons {
-    padding: 45px 0px;
-    margin-left: 17px;
+    padding: 17px 0px;
+    margin-left: 40px;
 }
 
 .all-ads-card-buttons>a {
@@ -111,7 +111,7 @@
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    width: 100px;
+    width: 140px;
     margin-top: 1em;
     padding: 7px;
     background: rgb(252, 83, 74);

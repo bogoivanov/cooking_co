@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth import get_user_model
 from django.views.generic import CreateView, UpdateView, DetailView, DeleteView, ListView
 
-from cooking_co.cocktails.forms import CocktailCreateForm
+from cooking_co.cocktails.forms import CocktailCreateForm, CocktailEditForm
 from cooking_co.cocktails.models import Cocktail
 from cooking_co.common.forms import CocktailCommentForm
 from cooking_co.common.models import CocktailComment, CocktailLike
@@ -58,8 +58,8 @@ class CocktailCreateView(LoginRequiredMixin, CreateView):
 class CocktailEditView(LoginRequiredMixin, UpdateView):
     template_name = 'cocktails/cocktail-edit.html'
     model = Cocktail
+    form_class = CocktailEditForm
     context_object_name = 'cocktail'
-    fields = ('cocktail_name', 'main_ingredient', 'other_ingredient', 'cocktail_photo')
 
     def get_success_url(self):
         return reverse_lazy('cocktail details', kwargs={

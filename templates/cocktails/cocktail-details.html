@@ -24,7 +24,8 @@
 
                     <h2>Main ingredient: {{ cocktail.main_ingredient }}</h2>
                     <h3>Ingredients: {{ cocktail.other_ingredient }}</h3>
-
+                    <h3><strong>Ingredients: </strong>{{ cocktail.other_ingredient }}</h3>
+                    <h3><strong>How to prepare: </strong>{{ cocktail.prepare }}</h3>
                     <article class="all-ads-card-buttons">
                         {% if is_owner %}
                             <a href="{% url 'cocktail edit' slug=cocktail.slug %}" class="btn-register">Edit</a>
