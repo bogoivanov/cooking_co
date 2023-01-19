@@ -42,7 +42,8 @@ class RecipeCommentForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        validate_dirty_words(cleaned_data['text'])
+        print(validate_dirty_words(cleaned_data['text']))
+
 
 
 

@@ -63,7 +63,7 @@ class RecipeComment(models.Model):
     MAX_TEXT_LENGTH = 300
     text = models.CharField(
         max_length=MAX_TEXT_LENGTH,
-        validators=[validate_dirty_words],
+        # validators=[validate_dirty_words],
         null=False,
         blank=False,
     )

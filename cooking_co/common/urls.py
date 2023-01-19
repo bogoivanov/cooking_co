@@ -1,10 +1,11 @@
 from django.urls import path
 
 from cooking_co.common.views import IndexViewListView, CocktailsSearchListView, users_list, comment_cocktail, \
-    like_cocktail, TestViewListView, Test404View, comment_recipe, like_recipe, RecipesSearchListView
+    like_cocktail, TestViewListView, comment_recipe, like_recipe, RecipesSearchListView, redirect_app_user_list
 
 urlpatterns = [
     path('', IndexViewListView.as_view(), name='index'),
+    path('', redirect_app_user_list, name='go home'),
     path('search-cocktails/', CocktailsSearchListView.as_view(), name='cocktails search'),
     path('search-recipes/', RecipesSearchListView.as_view(), name='recipes search'),
 
@@ -16,5 +17,4 @@ urlpatterns = [
 
     path('users/', users_list, name='all users'),
     path('test/', TestViewListView.as_view(), name='test users'),
-    path('404/', Test404View.as_view(), name='404'),
 ]

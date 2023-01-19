@@ -43,7 +43,7 @@ SECRET_KEY = 'django-insecure-yvw8c(fu&@*&!8r$jjzt7*(v2kmj_z5ydf^h*=%osxc4^l4e5@
 # DEBUG = False
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '*']
 # Application definition
 
 INSTALLED_APPS = [
@@ -173,7 +173,7 @@ AUTH_USER_MODEL = 'accounts.AppUser'
 
 LOGIN_URL = reverse_lazy('sign in')
 LOGIN_REDIRECT_URL = reverse_lazy('index')
-# LOGOUT_REDIRECT_URL = reverse_lazy('index')
+LOGOUT_REDIRECT_URL = reverse_lazy('index')
 
 
 EMAIL_HOST = 'in-v3.mailjet.com'

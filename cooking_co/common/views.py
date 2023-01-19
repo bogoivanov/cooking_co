@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, TemplateView
 from cooking_co.cocktails.models import Cocktail
+from cooking_co.common.core.dirty_words_validator import validate_dirty_words
 from cooking_co.common.decorators import allow_groups
 from cooking_co.common.forms import CocktailCommentForm, RecipeCommentForm
 from cooking_co.common.models import CocktailLike, RecipeLike
@@ -50,6 +51,7 @@ def comment_recipe(request, recipe_id):
         comment = form.save(commit=False)
         comment.recipe = recipe
         comment.user = request.user
+        comment.text = validate_dirty_words(comment.text)
         comment.save()
 
     return redirect(request.META['HTTP_REFERER'])
@@ -78,14 +80,13 @@ class TestViewListView(LoginRequiredMixin, ListView):
     template_name = 'common/test.html'
 
 
-class Test404View(TemplateView):
+class PageNotFoundView(TemplateView):
     template_name = '404.html'
 
 
 class IndexViewListView(ListView):
     model = UserModel
     context_object_name = 'profile'
-    template_name = 'common/index.html'
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -152,7 +153,8 @@ class RecipesSearchListView(LoginRequiredMixin, ListView):
         pattern = self.request.GET.get('pattern', None)
         return pattern.lower() if pattern else None
 
-
+def redirect_app_user_list(request):
+    return redirect('index')
 @allow_groups(groups=['StaffCC'])
 def users_list(request):
     users = UserModel.objects.all()
@@ -161,3 +163,5 @@ def users_list(request):
     }
 
     return render(request, 'common/users.html', context, )
+
+

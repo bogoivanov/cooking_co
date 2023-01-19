@@ -20,6 +20,8 @@ from django.template.defaulttags import url
 from django.urls import path, include
 from django.urls import re_path as url
 
+from cooking_co.common.views import PageNotFoundView
+
 urlpatterns = [
                   path('admin/', admin.site.urls),
 
@@ -33,4 +35,6 @@ urlpatterns = [
 
                   path('cocktails/', include('cooking_co.cocktails.urls')),
 
-              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+              ] 
+
+handler404 = PageNotFoundView.as_view()

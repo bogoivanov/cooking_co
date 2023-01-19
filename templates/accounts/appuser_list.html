@@ -1,0 +1,92 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block page_content %}
+    <main>
+
+        <section id="home-page">
+
+            {% if age_of_user < 21 %}
+            <article class="home-page-content">
+                <h1>Best Recipes Are Here For You</h1>
+                <p>On this site, you can find {{ all_articles_without_alcohol }} recipes and cocktails!</p>
+                <a href="{% url 'recipes all' %}" class="view-all-ads">View recipes</a>
+                <a href="{% url 'cocktails all' %}" class="view-all-ads">View cocktails</a>
+            </article>
+            {% else %}
+            <article class="home-page-content">
+                <h1>Best Recipes Are Here For You</h1>
+                <p>On this site, you can find {{ all_articles }} recipes and cocktails!</p>
+                <a href="{% url 'recipes all' %}" class="view-all-ads">View recipes</a>
+                <a href="{% url 'cocktails all' %}" class="view-all-ads">View cocktails</a>
+            </article>
+            {% endif %}
+
+
+            <article class="home-page-image">
+                <!-- Do not forget to change the path to the image -->
+                <img src="{% static "/img/waitresses.png" %}" alt="man">
+            </article>
+        </section>
+
+        <section class="intro">
+            <article class="intro-left-side">
+                <article class="intro-left-side-image">
+                    <!-- Do not forget to change the path to the image -->
+                    <img src="{% static "img/left-waitress.png" %}" alt="people">
+                </article>
+                <article class="intro-left-side-text">
+                    <h1>Welcom to CookingCoach!</h1>
+                    <h2>These are our cocktails and recipes.</h2>
+                </article>
+            </article>
+
+            <article class="intro-symbol">
+                <!-- Do not forget to change the path to the image -->
+                <img src="{% static "img/strip-square.png" %}" alt="strip-square">
+            </article>
+
+            <article class="intro-right-side">
+                {% if age_of_user >= 21 %}
+                    <!--If there are job ads in the database, show them (max 3)-->
+                    <article class="intro-right-side-content">
+                        <!-- Do not forget to change the path to the image -->
+                        <img src="{% static "img/cocktail-alc.png" %}" alt="technology">
+                        <h5>
+                            <!--Put the value of the headline below-->
+                            alcoholic cocktail recipes
+                            <!--Put the value of the total number of candidates below-->
+                            <span>recipes: {{ alcoholic_cocktails }}</span>
+                        </h5>
+                    </article>
+                {% endif %}
+
+                <article class="intro-right-side-content">
+                    <!-- Do not forget to change the path to the image -->
+                    <img src="{% static "img/cocktail-nonalc.png" %}" alt="technology">
+                    <h5>
+                        <!--Put the value of the headline below-->
+                        non-alcoholic cocktail recipes
+                        <!--Put the value of the total number of candidates below-->
+                        <span>recipes: {{ non_alcoholic_cocktails }}</span>
+                    </h5>
+                </article>
+
+                <article class="intro-right-side-content">
+                    <!-- Do not forget to change the path to the image -->
+                    <img src="{% static "img/food.png" %}" alt="technology">
+                    <h5>
+                        <!--Put the value of the headline below-->
+                        food recipes
+                        <!--Put the value of the total number of candidates below-->
+                        <span>recipes: {{ all_recipes }}</span>
+                    </h5>
+                </article>
+                <!--If not show:-->
+                <!--<p class="no-ads-created">No ads created!</p>-->
+
+            </article>
+        </section>
+    </main>
+
+{% endblock %}
